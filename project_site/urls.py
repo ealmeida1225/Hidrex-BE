@@ -44,7 +44,7 @@ urlpatterns = [
     path("business-gestion/", include("apps.business_app.urls")),
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
-    path("__debug__/", include("debug_toolbar.urls")),
+    # path("__debug__/", include("debug_toolbar.urls")),
     path("usuarios/", login_required(pages.usuarios), name="usuarios"),
     path("login/", pages.first_login, name="first_login"),
     path("register/", pages.register, name="register"),
