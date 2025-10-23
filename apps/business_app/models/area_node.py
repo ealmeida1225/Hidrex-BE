@@ -7,8 +7,4 @@ class AreaNode(models.Model):
     lat = models.FloatField()
     lon = models.FloatField()
     step = models.IntegerField()
-    area = models.ForeignKey(Area, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = "research_areanode"
+    area = models.ForeignKey(Area, models.CASCADE)

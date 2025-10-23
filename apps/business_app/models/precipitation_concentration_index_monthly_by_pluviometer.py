@@ -15,9 +15,5 @@ class PrecipitationConcentrationIndexMonthlyByPluviometer(models.Model):
     rain_by_period_avg = models.FloatField()
     rainy_days_by_period_avg = models.TextField()
     month = models.PositiveSmallIntegerField()
-    pluviometer = models.ForeignKey(Pluviometer, models.DO_NOTHING)
+    pluviometer = models.ForeignKey(Pluviometer, models.CASCADE)
     total_rain_value = models.FloatField()
-
-    class Meta:
-        managed = False
-        db_table = "research_precipitationconcentrationindexmonthlybypluviometer"

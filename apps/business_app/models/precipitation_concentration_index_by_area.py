@@ -14,9 +14,5 @@ class PrecipitationConcentrationIndexByArea(models.Model):
     rainy_days_percent = models.FloatField()
     rain_by_period_avg = models.FloatField()
     rainy_days_by_period_avg = models.TextField()
-    area = models.ForeignKey(Area, models.DO_NOTHING)
+    area = models.ForeignKey(Area, models.CASCADE)
     total_rain_value = models.FloatField()
-
-    class Meta:
-        managed = False
-        db_table = "research_precipitationconcentrationindexbyarea"

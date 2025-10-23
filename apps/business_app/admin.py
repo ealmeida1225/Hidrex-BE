@@ -4,6 +4,7 @@ from apps.business_app.models.diary_precipitation_classification import (
     DiaryPrecipitationClassification,
 )
 from apps.business_app.models.month_statistics import MonthStatistics
+from apps.business_app.models.pluviometer_area import PluviometerArea
 from apps.business_app.models.pluviometer_type import PluviometerType
 from apps.business_app.models.precipitation_concentration_index_by_area import (
     PrecipitationConcentrationIndexByArea,
@@ -160,6 +161,20 @@ class MonthStatisticsAdmin(admin.ModelAdmin):
         "rainy_streak_count",
         "rainy_days_count",
         "daily_mean",
+    ]
+
+
+@admin.register(PluviometerArea)
+class PluviometerAreaAdmin(admin.ModelAdmin):
+    empty_value_display = "-empty-"
+    list_display = [
+        "id",
+        "area",
+        "pluviometer",
+    ]
+    fields = [
+        "area",
+        "pluviometer",
     ]
 
 

@@ -9,15 +9,6 @@ from django.contrib.auth.models import User
 class Command(BaseCommand):
     help = "Loads initial fixtures"
 
-    # def handle(self, *args, **options):
-    # # print(
-    # #     colored(
-    # #         "There's no fixtures to add yet",
-    # #         "red",
-    # #         attrs=["blink"],
-    # #     )
-    # # )
-
     call_command("loaddata", "auth.group.json")
     print(
         colored(
@@ -37,43 +28,123 @@ class Command(BaseCommand):
         )
     )
 
-    # call_command("loaddata", "provinces.json")
-    # print(
-    # colored(
-    # "Successfully added provinces information",
-    # "green",
-    # attrs=["blink"],
-    # )
-    # )
-    # call_command("loaddata", "municipalities.json")
-    # print(
-    # colored(
-    # "Successfully added municipalities information",
-    # "green",
-    # attrs=["blink"],
-    # )
-    # )
-    # call_command("loaddata", "popular_councils.json")
-    # print(
-    # colored(
-    # "Successfully added popular councils information",
-    # "green",
-    # attrs=["blink"],
-    # )
-    # )
-    # call_command("loaddata", "osdes.json")
-    # print(
-    # colored(
-    # "Successfully added osdes information",
-    # "green",
-    # attrs=["blink"],
-    # )
-    # )
-    # call_command("loaddata", "enterprises.json")
-    # print(
-    # colored(
-    # "Successfully added enterprises information",
-    # "green",
-    # attrs=["blink"],
-    # )
-    # )
+    call_command("loaddata", "area_type.json")
+    print(
+        colored(
+            "Successfully added area_type information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+    call_command("loaddata", "area.json")
+    print(
+        colored(
+            "Successfully added area information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+    call_command("loaddata", "area_nodes.json")
+    print(
+        colored(
+            "Successfully added area_nodes information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+    call_command("loaddata", "pluviometer_type.json")
+    print(
+        colored(
+            "Successfully added pluviometer_type information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+    call_command("loaddata", "pluviometer.json")
+    print(
+        colored(
+            "Successfully added pluviometer information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+    call_command("loaddata", "diary_precipitation_classification.json")
+    print(
+        colored(
+            "Successfully added diary precipitation classification information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+    call_command("loaddata", "year_statistics.json")
+    print(
+        colored(
+            "Successfully added year statistics information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+
+    call_command("loaddata", "month_statistics.json")
+    print(
+        colored(
+            "Successfully added month statistics information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+
+    call_command("loaddata", "registers.json")
+    print(
+        colored(
+            "Successfully added registers information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+    call_command("loaddata", "pluviometer_area.json")
+    print(
+        colored(
+            "Successfully added pluviometer_area information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+
+    call_command("loaddata", "precipitation_concentration_index_by_area.json")
+    print(
+        colored(
+            "Successfully added precipitation concentration index by area information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+
+    call_command("loaddata", "precipitation_concentration_index_by_pluvimeter.json")
+    print(
+        colored(
+            "Successfully added precipitation concentration index by pluviometer information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+
+    call_command("loaddata", "precipitation_concentration_index_monthly_by_area.json")
+    print(
+        colored(
+            "Successfully added precipitation concentration index monthly by area information",
+            "green",
+            attrs=["blink"],
+        )
+    )
+
+    call_command(
+        "loaddata", "precipitation_concentration_index_monthly_by_pluviometer.json"
+    )
+    print(
+        colored(
+            "Successfully added precipitation concentration index monthly by pluviometer information",
+            "green",
+            attrs=["blink"],
+        )
+    )

@@ -6,9 +6,5 @@ class AreaType(models.Model):
     representation = models.CharField(max_length=7)
     description = models.TextField()
 
-    class Meta:
-        managed = False
-        db_table = "research_areatype"
-        
     def __str__(self):
         return self.name

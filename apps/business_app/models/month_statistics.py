@@ -12,9 +12,5 @@ class MonthStatistics(models.Model):
     standard_deviation = models.FloatField()
     variance = models.FloatField()
     month = models.PositiveSmallIntegerField()
-    year = models.ForeignKey(YearStatistics, models.DO_NOTHING)
+    year = models.ForeignKey(YearStatistics, models.CASCADE)
     total_precipit = models.FloatField()
-
-    class Meta:
-        managed = False
-        db_table = "research_monthstatistics"

@@ -15,8 +15,4 @@ class PrecipitationConcentrationIndexByPluviometer(models.Model):
     rainy_days_percent = models.FloatField()
     rain_by_period_avg = models.FloatField()
     rainy_days_by_period_avg = models.TextField()
-    pluviometer = models.ForeignKey(Pluviometer, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = "research_precipitationconcentrationindexbypluviometer"
+    pluviometer = models.ForeignKey(Pluviometer, models.CASCADE)

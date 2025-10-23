@@ -7,5 +7,4 @@ class DiaryPrecipitationClassification(models.Model):
     classification = models.CharField(max_length=20)
 
     class Meta:
-        managed = False
         db_table = "research_diaryprecipitationclassification"

@@ -13,9 +13,5 @@ class Pluviometer(models.Model):
         PluviometerType, models.DO_NOTHING, blank=True, null=True
     )
 
-    class Meta:
-        managed = False
-        db_table = "research_pluviometer"
-
     def __str__(self):
         return self.name
