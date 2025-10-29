@@ -5,10 +5,11 @@ const csrfToken = document.cookie
   ?.split("=")[1];
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
-const url = "/business-gestion/brands/";
+const url = "/business-gestion/area/";
 
 $(function () {
   bsCustomFileInput.init();
+  poblarListas();
 });
 
 $(document).ready(function () {
@@ -21,7 +22,7 @@ $(document).ready(function () {
           text: "Crear",
           className: " btn btn-primary btn-info",
           action: function (e, dt, node, config) {
-            $("#modal-crear-brands").modal("show");
+            $("#modal-create-area").modal("show");
           },
         },
         {
@@ -45,7 +46,7 @@ $(document).ready(function () {
       processing: true,
       ajax: function (data, callback, settings) {
         dir = "";
-        console.log("✌️data --->", data);
+
         if (data.order[0].dir == "desc") {
           dir = "-";
         }
@@ -72,23 +73,18 @@ $(document).ready(function () {
       },
       columns: [
         { data: "name", title: "Nombre" },
-        {
-          data: "logo",
-          title: "Logo",
-          render: function (data, type, row) {
-            return (
-              '<div style="text-align: center;"><img src="' +
-              data +
-              '" alt="Logo" style="width:50px; height:auto;"></div>'
-            );
-          },
-        },
+        { data: "area_type_name", title: "Tipo" },
+        { data: "sub_name", title: "Sub nombre" },
+        { data: "centroid_lat", title: "Centroide (Latitud)" },
+        { data: "centroid_lon", title: "Centroide (Longitud)" },
+        { data: "description", title: "Descripción" },
+
         {
           data: "",
           title: "Acciones",
           render: (data, type, row) => {
             return `<div class="btn-group">
-                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-crear-brands" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
+                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-area" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
                           <i class="fas fa-edit"></i>
                         </button>  
                         <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
@@ -105,44 +101,46 @@ $(document).ready(function () {
 
 let selected_id;
 
-$("#modal-crear-brands").on("hide.bs.modal", (event) => {
-  // The form element is selected from the event trigger and its value is reset.
+$("#modal-create-area").on("hide.bs.modal", (event) => {
   const form = event.currentTarget.querySelector("form");
   form.reset();
-  // The 'edit_brands' flag is set to false.
-  edit_brands = false;
-  // An array 'elements' is created containing all the HTML elements found inside the form element.
+  edit_area = false;
   const elements = [...form.elements];
-  // A forEach loop is used to iterate through each element in the array.
   elements.forEach((elem) => elem.classList.remove("is-invalid"));
 });
 
-let edit_brands = false;
-$("#modal-crear-brands").on("show.bs.modal", function (event) {
+let edit_area = false;
+$("#modal-create-area").on("show.bs.modal", function (event) {
   var button = $(event.relatedTarget); // Button that triggered the modal
 
   var modal = $(this);
   if (button.data("type") == "edit") {
     var dataName = button.data("name"); // Extract info from data-* attributes
     selected_id = button.data("id"); // Extract info from data-* attributes
-    edit_brands = true;
+    edit_area = true;
 
-    modal.find(".modal-title").text("Editar Marca " + dataName);
+    modal.find(".modal-title").text("Editar " + dataName);
 
     // Realizar la petición con Axios
     axios
       .get(`${url}` + selected_id + "/")
       .then(function (response) {
         // Recibir la respuesta
-        const brands = response.data;
-        console.log(brands.name);
+        const selected_area = response.data;
+        console.log(form.elements);
 
-        form.elements.name.value = brands.name;
-        form.elements.logo.value = brands.logo;
+        form.elements.name.value = selected_area.name;
+        form.elements.sub_name.value = selected_area.sub_name;
+        form.elements.area_type.value = selected_area.area_type;
+        form.elements.centroid_lat.value = selected_area.centroid_lat;
+        form.elements.centroid_lon.value = selected_area.centroid_lon;
+        form.elements.description.value = selected_area.description;
+
+        // document.getElementById("selectbrands").select= models.brand;
       })
       .catch(function (error) {});
   } else {
-    modal.find(".modal-title").text("Crear Marca");
+    modal.find(".modal-title").text("Crear");
   }
 });
 
@@ -155,12 +153,9 @@ $(function () {
     },
   });
 
-  $("#form-create-brands").validate({
+  $("#form-create-area").validate({
     rules: {
       name: {
-        required: true,
-      },
-      logo: {
         required: true,
       },
     },
@@ -181,11 +176,9 @@ $(function () {
   });
 });
 
+// crear Modelo
 
-
-// crear marca
-
-let form = document.getElementById("form-create-brands");
+let form = document.getElementById("form-create-area");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var table = $("#tabla-de-Datos").DataTable();
@@ -196,25 +189,27 @@ form.addEventListener("submit", function (event) {
   axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
   let data = new FormData();
   data.append("name", document.getElementById("name").value);
-  if (document.getElementById("logo").files[0] != null) {
-    data.append("logo", document.getElementById("logo").files[0]);
-  }
+  data.append("sub_name", document.getElementById("sub_name").value);
+  data.append("centroid_lat", document.getElementById("centroid_lat").value);
+  data.append("centroid_lon", document.getElementById("centroid_lon").value);
+  data.append("area_type", document.getElementById("area_type").value);
+  data.append("description", document.getElementById("description").value);
 
-  if (edit_brands) {
+  if (edit_area) {
     axios
       .patch(`${url}` + selected_id + "/", data)
       .then((response) => {
         if (response.status === 200) {
-          $("#modal-crear-brands").modal("hide");
+          $("#modal-create-area").modal("hide");
           Swal.fire({
             icon: "success",
-            title: "Marca actualizada con éxito  ",
+            title: "Actualizado con éxito  ",
             showConfirmButton: false,
             timer: 1500,
           });
           table.ajax.reload();
 
-          edit_brands = false;
+          edit_area = false;
         }
       })
       .catch((error) => {
@@ -226,7 +221,7 @@ form.addEventListener("submit", function (event) {
 
         Swal.fire({
           icon: "error",
-          title: "Error al crear la Marca",
+          title: "Error al crear",
           text: textError,
           showConfirmButton: false,
           timer: 1500,
@@ -239,12 +234,12 @@ form.addEventListener("submit", function (event) {
         if (response.status === 201) {
           Swal.fire({
             icon: "success",
-            title: "Marca creada con exito",
+            title: "Modelo creado con exito",
             showConfirmButton: false,
             timer: 1500,
           });
           table.ajax.reload();
-          $("#modal-crear-brands").modal("hide");
+          $("#modal-create-area").modal("hide");
         }
       })
       .catch((error) => {
@@ -256,7 +251,7 @@ form.addEventListener("submit", function (event) {
 
         Swal.fire({
           icon: "error",
-          title: "Error al crear la marca",
+          title: "Error al crear",
           text: textError,
           showConfirmButton: false,
           timer: 1500,
@@ -265,16 +260,15 @@ form.addEventListener("submit", function (event) {
   }
 });
 
-// function poblarListas() {
-//     var $country = document.getElementById("country");
-//     axios.get("../../brands-gestion/countries/get-all/").then(function (response) {
-//         response.data.results.forEach(function (element) {
-//             var option = new Option(element.name, element.id);
-//             $country.add(option);
-//         });
-//     });
-
-// }
+function poblarListas() {
+  var $area_types = document.getElementById("area_type");
+  axios.get("../../business-gestion/area-type/").then(function (response) {
+    response.data.results.forEach(function (element) {
+      var option = new Option(element.name, element.id);
+      $area_types.add(option);
+    });
+  });
+}
 
 function function_delete(id, name) {
   const table = $("#tabla-de-Datos").DataTable();

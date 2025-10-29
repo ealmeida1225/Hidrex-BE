@@ -8,7 +8,7 @@ class Area(models.Model):
     sub_name = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     centroid_lat = models.FloatField()
-    area_type = models.ForeignKey(AreaType, models.DO_NOTHING, null=True)
+    area_type = models.ForeignKey(AreaType, models.DO_NOTHING, null=True, blank=True)
     centroid_lon = models.FloatField()
 
     def __str__(self):

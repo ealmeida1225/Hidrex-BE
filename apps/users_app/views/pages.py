@@ -19,12 +19,12 @@ def register(request):
     return render(request, "login/register.html")
 
 
-def brands(request):
-    return render(request, "brands/brands.html")
+def area_type(request):
+    return render(request, "area_type/area_type.html")
 
 
-def models(request):
-    return render(request, "models/models.html")
+def areas(request):
+    return render(request, "areas/areas.html")
 
 
 def shops(request):

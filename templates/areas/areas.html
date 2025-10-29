@@ -20,12 +20,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Modelos</h1>
+          <h1>Áreas</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-            <li class="breadcrumb-item active">Modelos</li>
+            <li class="breadcrumb-item active">Área</li>
           </ol>
         </div>
       </div>
@@ -43,7 +43,7 @@
           <div class="card">
             <div class="card-header">
 
-              <h3 class="card-title">Gestionar Modelo</h3>
+              <h3 class="card-title">Gestionar Área</h3>
             </div>
             <!-- /.card-header -->
             <div class="modal-body">
@@ -68,7 +68,7 @@
 <!-- /.content-wrapper -->
 
 <!-- modal para crear modelo -->
-<div class="modal fade" id="modal-crear-models" data-backdrop="static" tabindex="-1" role="dialog"
+<div class="modal fade" id="modal-create-area" data-backdrop="static" tabindex="-1" role="dialog"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -79,7 +79,7 @@
         </button>
       </div>
 
-      <form id="form-create-models">
+      <form id="form-create-area">
         <div class="card-body">
 
           <div class="row">
@@ -88,17 +88,27 @@
               <input type="text" class="form-control" id="name" name="name" placeholder="Entre el nombre" required>
             </div>
             <div class="form-group col-sm-6">
-              <label for="name">Marca</label>
-              <select class="form-control " id="selectbrands" name="selectbrands" tabindex="-1"></select>
+              <label for="area_type">Tipo de área</label>
+              <select class="form-control " id="area_type" name="area_type" tabindex="-1"></select>
             </div>
           </div>
         
           <div class="form-group">
-            <label>Extra</label>
-            <textarea class="form-control" rows="3" id="extra_info" name="extra_info" placeholder="Enter ..."></textarea>
+            <label>Sub nombre</label>
+            <input type="text" class="form-control" rows="3" id="sub_name" name="sub_name" placeholder="Enter subname"></textarea>
+          </div>        
+          <div class="form-group">
+            <label>Latitud del centroide</label>
+            <input type="number" class="form-control" rows="3" id="centroid_lat" name="centroid_lat" placeholder="Enter ..."></textarea>
+          </div>        
+          <div class="form-group">
+            <label>Longitud del centroide</label>
+            <input type="number" class="form-control" rows="3" id="centroid_lon" name="centroid_lon" placeholder="Enter ..."></textarea>
+          </div>        
+          <div class="form-group">
+            <label>Descripción</label>
+            <textarea class="form-control" rows="3" id="description" name="description" placeholder="Descripción"></textarea>
           </div>
-
-
         </div>
 
         <!-- /.card-body -->
@@ -141,7 +151,7 @@
 <script src="{% static 'assets/plugins/jquery-validation/localization/messages_es.js' %}"></script>
 <script src="{% static 'assets/dist/js/axios.min.js' %}"></script>
 
-<script src="{% static 'assets/dist/js/models.js' %}"></script>
+<script src="{% static 'assets/dist/js/areas.js' %}"></script>
 <script src="{% static 'assets/plugins/select2/js/select2.full.min.js' %}"></script>
 
 <!-- Page specific script -->

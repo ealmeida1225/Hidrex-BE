@@ -8,6 +8,8 @@ logger = logging.getLogger(__name__)
 
 
 class AreaSerializer(serializers.ModelSerializer):
+    area_type_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Area
         fields = [
@@ -15,7 +17,11 @@ class AreaSerializer(serializers.ModelSerializer):
             "name",
             "sub_name",
             "area_type",
+            "area_type_name",
             "description",
             "centroid_lat",
             "centroid_lon",
         ]
+
+    def get_area_type_name(self, object):
+        return object.area_type.name if object.area_type else "No definido"
