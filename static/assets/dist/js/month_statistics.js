@@ -9,6 +9,7 @@ const url = "/business-gestion/month-statistics/";
 
 $(function () {
   bsCustomFileInput.init();
+  poblarListas()
 });
 
 $(document).ready(function () {
@@ -70,7 +71,7 @@ $(document).ready(function () {
           });
       },
       columns: [
-        { data: "year", title: "Año" },
+        { data: "year_name", title: "Pluviómetro (Año)" },
         { data: "month", title: "Mes" },
         {
           data: "max_registered_value",
@@ -79,10 +80,8 @@ $(document).ready(function () {
           { data: "total_precipit", title: "Total de precipitaciones" },
           { data: "variance", title: "Varianza" },
           { data: "standard_deviation", title: "Desviación estándar" },
-          { data: "total_precipit", title: "Total de precipitaciones" },
           { data: "rainy_streak_med_long", title: "Long media de rachas lluviosas" },
           { data: "rainy_streak_count", title: "Cantidad de rachas lluviosas" },
-          { data: "max_registered_value", title: "Mayor valor registrado" },
           { data: "rainy_days_count", title: "Cantidad de días lluviosos" },
           { data: "daily_mean", title: "Media diaria" },
 
@@ -148,6 +147,7 @@ $("#modal-create-diary-precipitation-classification").on("show.bs.modal", functi
         form.elements.variance.value = element.variance;
         form.elements.year.value = element.year;
         form.elements.month.value = element.month;
+        form.elements.max_registered_value.value = element.max_registered_value;
       })
       .catch(function (error) {});
   } else {
@@ -209,6 +209,7 @@ form.addEventListener("submit", function (event) {
   data.append("month", document.getElementById("month").value);
   data.append("standard_deviation", document.getElementById("standard_deviation").value);
   data.append("max_registered_value", document.getElementById("max_registered_value").value);
+  data.append("total_precipit", document.getElementById("total_precipit").value);
 
   if (edit_element) {
     axios
@@ -275,6 +276,16 @@ form.addEventListener("submit", function (event) {
   }
 });
 
+function poblarListas() {
+  // Poblar la lista de tiendas
+  var $year_statistic = document.getElementById("year");
+  axios.get("/business-gestion/year-statistics/").then(function (response) {
+    response.data.results.forEach(function (element) {
+      var option = new Option(element.__str__, element.id);
+      $year_statistic.add(option);
+    });
+  });
+}
 
 function function_delete(id, name) {
   const table = $("#tabla-de-Datos").DataTable();

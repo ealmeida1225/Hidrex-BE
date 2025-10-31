@@ -23,4 +23,5 @@ class YearStatisticsSerializer(serializers.ModelSerializer):
             "rainy_days_count",
             "rainy_streak_count",
             "rainy_streak_med_long",
+            "__str__"
         ]

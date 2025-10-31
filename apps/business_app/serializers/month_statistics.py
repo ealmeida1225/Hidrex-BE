@@ -8,6 +8,8 @@ logger = logging.getLogger(__name__)
 
 
 class MonthStatisticsSerializer(serializers.ModelSerializer):
+    year_name = serializers.CharField(source="year.__str__", read_only = True)
+
     class Meta:
         model = MonthStatistics
         fields = [
@@ -15,6 +17,7 @@ class MonthStatisticsSerializer(serializers.ModelSerializer):
             "max_registered_value",
             "total_precipit",
             "year",
+            "year_name",
             "month",
             "variance",
             "standard_deviation",

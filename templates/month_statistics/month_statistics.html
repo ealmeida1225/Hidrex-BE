@@ -80,7 +80,10 @@
         <div class="card-body">
 
           <div class="row">
-
+            <div class="form-group col-md-6">
+              <label for="variance">Pluviómetro (Año)</label>
+              <select class="form-control" id="year" name="year" tabindex="-1"></select>
+            </div>  
             <div class="form-group col-md-6">
               <label for="max_registered_value">Mayor valor registrado</label>
               <input type="max_registered_value" class="form-control" id="max_registered_value" name="lower_limmit" placeholder="Entre el límite inferior"
@@ -95,10 +98,7 @@
               <label for="month">Mes</label>
               <input type="number" class="form-control" id="month" name="month" placeholder="Mes..." required>
             </div>  
-            <div class="form-group col-md-6">
-              <label for="year">Año</label>
-              <input type="number" class="form-control" id="year" name="year" required>
-            </div>      
+   
             <div class="form-group col-md-6">
               <label for="variance">Varianza</label>
               <input type="number" class="form-control" id="variance" name="variance" required>
@@ -107,10 +107,7 @@
               <label for="standard_deviation">Desviación estándar</label>
               <input type="number" class="form-control" id="standard_deviation" name="standard_deviation" required>
             </div>         
-            <div class="form-group col-md-6">
-              <label for="variance">Varianza</label>
-              <input type="number" class="form-control" id="variance" name="variance" required>
-            </div>      
+  
             <div class="form-group col-md-6">
               <label for="rainy_streak_med_long">Long media de rachas lluviosas</label>
               <input type="rainy_streak_med_long" class="form-control" id="rainy_streak_med_long" name="rainy_streak_med_long" required>
