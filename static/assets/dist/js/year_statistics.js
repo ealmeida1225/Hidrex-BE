@@ -5,10 +5,12 @@ const csrfToken = document.cookie
   ?.split("=")[1];
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
-const url = "/business-gestion/month-statistics/";
+const url = "/business-gestion/year-statistics/";
 
 $(function () {
   bsCustomFileInput.init();
+  poblarListas();
+
 });
 
 $(document).ready(function () {
@@ -21,7 +23,7 @@ $(document).ready(function () {
           text: "Crear",
           className: " btn btn-primary btn-info",
           action: function (e, dt, node, config) {
-            $("#modal-create-diary-precipitation-classification").modal("show");
+            $("#modal-create-year-statistics").modal("show");
           },
         },
         {
@@ -32,7 +34,7 @@ $(document).ready(function () {
           extend: "pdf",
           text: "PDF",
         },
-        {
+        { 
           extend: "print",
           text: "Print",
         },
@@ -70,19 +72,15 @@ $(document).ready(function () {
           });
       },
       columns: [
+        { data: "pluviometer_name", title: "Pluviómetro" },
         { data: "year", title: "Año" },
-        { data: "month", title: "Mes" },
+        { data: "total_precipit", title: "Total de precipitaciones" },
         {
           data: "max_registered_value",
           title: "Mayor valor registrado",
         },
-          { data: "total_precipit", title: "Total de precipitaciones" },
-          { data: "variance", title: "Varianza" },
-          { data: "standard_deviation", title: "Desviación estándar" },
-          { data: "total_precipit", title: "Total de precipitaciones" },
           { data: "rainy_streak_med_long", title: "Long media de rachas lluviosas" },
           { data: "rainy_streak_count", title: "Cantidad de rachas lluviosas" },
-          { data: "max_registered_value", title: "Mayor valor registrado" },
           { data: "rainy_days_count", title: "Cantidad de días lluviosos" },
           { data: "daily_mean", title: "Media diaria" },
 
@@ -92,7 +90,7 @@ $(document).ready(function () {
           title: "Acciones",
           render: (data, type, row) => {
             return `<div class="btn-group">
-                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-diary-precipitation-classification" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
+                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-year-statistics" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
                           <i class="fas fa-edit"></i>
                         </button>  
                         <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
@@ -109,7 +107,7 @@ $(document).ready(function () {
 
 let selected_id;
 
-$("#modal-create-diary-precipitation-classification").on("hide.bs.modal", (event) => {
+$("#modal-create-year-statistics").on("hide.bs.modal", (event) => {
   // The form element is selected from the event trigger and its value is reset.
   const form = event.currentTarget.querySelector("form");
   form.reset();
@@ -122,7 +120,7 @@ $("#modal-create-diary-precipitation-classification").on("hide.bs.modal", (event
 });
 
 let edit_element = false;
-$("#modal-create-diary-precipitation-classification").on("show.bs.modal", function (event) {
+$("#modal-create-year-statistics").on("show.bs.modal", function (event) {
   var button = $(event.relatedTarget); // Button that triggered the modal
 
   var modal = $(this);
@@ -140,14 +138,13 @@ $("#modal-create-diary-precipitation-classification").on("show.bs.modal", functi
         // Recibir la respuesta
         const element = response.data;
         form.elements.daily_mean.value = element.daily_mean;
+        form.elements.max_registered_value.value = element.max_registered_value;
         form.elements.rainy_days_count.value = element.rainy_days_count;
         form.elements.rainy_streak_count.value = element.rainy_streak_count;
         form.elements.rainy_streak_med_long.value = element.rainy_streak_med_long;
-        form.elements.standard_deviation.value = element.standard_deviation;
         form.elements.total_precipit.value = element.total_precipit;
-        form.elements.variance.value = element.variance;
         form.elements.year.value = element.year;
-        form.elements.month.value = element.month;
+        form.elements.pluviometer.value = element.pluviometer;
       })
       .catch(function (error) {});
   } else {
@@ -164,7 +161,7 @@ $(function () {
     },
   });
 
-  $("#form-create-diary-precipitation-classification").validate({
+  $("#form-create-year-statistics").validate({
     rules: {
       name: {
         required: true,
@@ -189,7 +186,7 @@ $(function () {
 
 
 
-let form = document.getElementById("form-create-diary-precipitation-classification");
+let form = document.getElementById("form-create-year-statistics");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var table = $("#tabla-de-Datos").DataTable();
@@ -199,23 +196,21 @@ form.addEventListener("submit", function (event) {
     ?.split("=")[1];
   axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
   let data = new FormData();
-  data.append("variance", document.getElementById("variance").value);
   data.append("daily_mean", document.getElementById("daily_mean").value);
   data.append("rainy_days_count", document.getElementById("rainy_days_count").value);
   data.append("rainy_streak_count", document.getElementById("rainy_streak_count").value);
   data.append("rainy_streak_med_long", document.getElementById("rainy_streak_med_long").value);
   data.append("year", document.getElementById("year").value);
-  data.append("rainy_streak_med_long", document.getElementById("rainy_streak_med_long").value);
-  data.append("month", document.getElementById("month").value);
-  data.append("standard_deviation", document.getElementById("standard_deviation").value);
   data.append("max_registered_value", document.getElementById("max_registered_value").value);
+  data.append("pluviometer", document.getElementById("pluviometer").value);
+  data.append("total_precipit", document.getElementById("total_precipit").value);
 
   if (edit_element) {
     axios
       .patch(`${url}` + selected_id + "/", data)
       .then((response) => {
         if (response.status === 200) {
-          $("#modal-create-diary-precipitation-classification").modal("hide");
+          $("#modal-create-year-statistics").modal("hide");
           Swal.fire({
             icon: "success",
             title: "Clasificación actualizada con éxito  ",
@@ -254,7 +249,7 @@ form.addEventListener("submit", function (event) {
             timer: 1500,
           });
           table.ajax.reload();
-          $("#modal-create-diary-precipitation-classification").modal("hide");
+          $("#modal-create-year-statistics").modal("hide");
         }
       })
       .catch((error) => {
@@ -275,6 +270,16 @@ form.addEventListener("submit", function (event) {
   }
 });
 
+function poblarListas() {
+  // Poblar la lista de tiendas
+  var $pluviometers = document.getElementById("pluviometer");
+  axios.get("/business-gestion/pluviometer/").then(function (response) {
+    response.data.results.forEach(function (element) {
+      var option = new Option(element.__str__, element.id);
+      $pluviometers.add(option);
+    });
+  });
+}
 
 function function_delete(id, name) {
   const table = $("#tabla-de-Datos").DataTable();

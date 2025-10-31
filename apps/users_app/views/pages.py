@@ -37,6 +37,9 @@ def area_node(request):
 def month_statistics(request):
     return render(request, "month_statistics/month_statistics.html")
 
+def year_statistics(request):
+    return render(request, "year_statistics/year_statistics.html")
+
 
 def pluviometer(request):
     return render(request, "pluviometer/pluviometer.html")

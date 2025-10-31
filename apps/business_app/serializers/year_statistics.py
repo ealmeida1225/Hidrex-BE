@@ -8,11 +8,14 @@ logger = logging.getLogger(__name__)
 
 
 class YearStatisticsSerializer(serializers.ModelSerializer):
+    pluviometer_name = serializers.CharField(source="pluviometer.__str__", read_only = True)
+
     class Meta:
         model = YearStatistics
         fields = [
             "id",
             "pluviometer",
+            "pluviometer_name",
             "year",
             "total_precipit",
             "max_registered_value",

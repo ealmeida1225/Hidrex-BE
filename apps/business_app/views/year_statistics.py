@@ -16,7 +16,7 @@ class YearStatisticsViewSet(viewsets.ModelViewSet, GenericAPIView):
     API endpoint that allows file upload extensions added or edited.
     """
 
-    queryset = YearStatistics.objects.all()
+    queryset = YearStatistics.objects.all().select_related("pluviometer")
     serializer_class = YearStatisticsSerializer
     ordering_fields = "__all__"
     filter_backends = [

@@ -58,6 +58,7 @@ urlpatterns = [
     path("shops/", pages.shops, name="shops"),
     path("products/", pages.products, name="products"),
     path("registers/", pages.registers, name="registers"),
+    path("year_statistics/", pages.year_statistics, name="year_statistics"),
     path("month_statistics/", pages.month_statistics, name="month_statistics"),
     path("diary_precipitation_classification/", pages.diary_precipitation_classification, name="diary_precipitation_classification"),
 ]
