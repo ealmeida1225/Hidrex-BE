@@ -20,12 +20,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Users</h1>
+          <h1>Áreas</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Users</li>
+            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item active">Área</li>
           </ol>
         </div>
       </div>
@@ -43,7 +43,7 @@
           <div class="card">
             <div class="card-header">
 
-              <h3 class="card-title">Manage User</h3>
+              <h3 class="card-title">Gestionar Área</h3>
             </div>
             <!-- /.card-header -->
             <div class="modal-body">
@@ -66,100 +66,66 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<!-- modal para eliminar usuario -->
-<div class="modal fade" id="modal-eliminar-usuario">
-  <div class="modal-dialog">
-    <div class="modal-content bg-danger">
-      <div class="modal-header">
-        <h4 class="modal-title">Delete User</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-light" data-dismiss="modal"
-          onclick="function_delete(selected_id)">Delete</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<!-- modal para crear usuario -->
-<div class="modal fade" id="modal-create-usuario" data-backdrop="static" tabindex="-1" role="dialog"
+
+<!-- modal para crear modelo -->
+<div class="modal fade" id="modal-create-pluviometer" data-backdrop="static" tabindex="-1" role="dialog"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Add User</h4>
+        <h4 class="modal-title">Adicionar Pluivómetro</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
-      <form id="form-create-user">
+      <form id="form-create-pluviometer">
         <div class="card-body">
 
           <div class="row">
-            <div class="form-group col-md-6">
-              <label for="first_name">Name</label>
-              <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Entre el nombre"
-                required>
+            <div class="form-group col-sm-6">
+              <label for="name">Nombre</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Entre el nombre" required>
             </div>
-            <div class="form-group col-md-6">
-              <label for="last_name">Last Name</label>
-              <input type="text" class="form-control" id="last_name" placeholder="Entre los Apellidos" required>
+            <div class="form-group col-sm-6">
+              <label for="area_type">Tipo</label>
+              <select class="form-control " id="pluviometer_type" name="pluviometer_type" tabindex="-1"></select>
             </div>
           </div>
-          <div class="row">
+        
+          <div class="form-group">
+            <label>Nombre de la estación</label>
+            <input type="text" class="form-control" rows="3" id="station_name" name="station_name" placeholder="Enter subname"></input>
+          </div>        
+          <div class="form-group">
+            <label>Latitud</label>
+            <input type="number" class="form-control" rows="3" id="lat" name="lat" placeholder="Enter ..."></input>
+          </div>        
+          <div class="form-group">
+            <label>Longitud</label>
+            <input type="number" class="form-control" rows="3" id="lon" name="lon" placeholder="Enter ..."></input>
+          </div>        
+          <div class="form-group">
+            <label>Metros sobre nivel del mar</label>
+            <textarea class="form-control" rows="3" id="msnm" name="msnm" placeholder="Descripción"></textarea>
+          </div>
+        </div>
 
-            <div class="form-group col-md-6">
-              <label for="username2">Usuario</label>
-              <input type="username2" class="form-control" id="username2" name="username2"
-                placeholder="Entre el usuario" required>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Entre el email" required>
-            </div>
-          </div>
-          <div>
-            <div class="form-check" id="credencial" hidden>
-              <input class="form-check-input" type="checkbox" id="checkcredencial">
-              <label class="form-check-label">Edit Password</label>
-              <br>
-            </div>
+        <!-- /.card-body -->
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
 
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
-                required>
-            </div>
-            <div class="form-group">
-              <label for="inputPasswordValidate">Repeat Password</label>
-              <input type="password" class="form-control" name="inputPasswordValidate" id="inputPasswordValidate"
-                placeholder="Contraseña" required>
-            </div>
-
-          </div>
-          <!-- /.card-body -->
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Send</button>
-          </div>
 
       </form>
 
     </div>
-
   </div>
 
-  <!-- /.modal-content -->
+</div>
+
+<!-- /.modal-content -->
 </div>
 <!-- /.modal-dialog -->
 </div>
@@ -184,7 +150,8 @@
 <script src="{% static 'assets/plugins/jquery-validation/additional-methods.min.js' %}"></script>
 <script src="{% static 'assets/plugins/jquery-validation/localization/messages_es.js' %}"></script>
 <script src="{% static 'assets/dist/js/axios.min.js' %}"></script>
-<script src="{% static 'assets/dist/js/createuser.js' %}"></script>
+
+<script src="{% static 'assets/dist/js/pluviometer.js' %}"></script>
 <script src="{% static 'assets/plugins/select2/js/select2.full.min.js' %}"></script>
 
 <!-- Page specific script -->

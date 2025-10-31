@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 class PluviometerSerializer(serializers.ModelSerializer):
+    pluviometer_type_name = serializers.CharField(source="pluviometer_type.__str__")
     class Meta:
         model = Pluviometer
         fields = [
@@ -18,4 +19,6 @@ class PluviometerSerializer(serializers.ModelSerializer):
             "station_name",
             "msnm",
             "pluviometer_type",
+            "pluviometer_type_name",
+            "__str__",
         ]

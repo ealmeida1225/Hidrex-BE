@@ -45,7 +45,6 @@ $(document).ready(function () {
       processing: true,
       ajax: function (data, callback, settings) {
         dir = "";
-        console.log("✌️data --->", data);
         if (data.order[0].dir == "desc") {
           dir = "-";
         }
@@ -107,7 +106,7 @@ $("#modal-create-area-type").on("hide.bs.modal", (event) => {
   const form = event.currentTarget.querySelector("form");
   form.reset();
   // The 'edit_brands' flag is set to false.
-  edit_brands = false;
+  edit_element = false;
   // An array 'elements' is created containing all the HTML elements found inside the form element.
   const elements = [...form.elements];
   // A forEach loop is used to iterate through each element in the array.
@@ -122,9 +121,9 @@ $("#modal-create-area-type").on("show.bs.modal", function (event) {
   if (button.data("type") == "edit") {
     var dataName = button.data("name"); // Extract info from data-* attributes
     selected_id = button.data("id"); // Extract info from data-* attributes
-    edit_brands = true;
+    edit_element = true;
 
-    modal.find(".modal-title").text("Editar Marca " + dataName);
+    modal.find(".modal-title").text("Editar " + dataName);
 
     // Realizar la petición con Axios
     axios
@@ -197,7 +196,7 @@ form.addEventListener("submit", function (event) {
   data.append("representation", document.getElementById("representation").value);
   data.append("description", document.getElementById("description").value);
 
-  if (edit_brands) {
+  if (edit_element) {
     axios
       .patch(`${url}` + selected_id + "/", data)
       .then((response) => {
@@ -211,7 +210,7 @@ form.addEventListener("submit", function (event) {
           });
           table.ajax.reload();
 
-          edit_brands = false;
+          edit_element = false;
         }
       })
       .catch((error) => {
@@ -236,7 +235,7 @@ form.addEventListener("submit", function (event) {
         if (response.status === 201) {
           Swal.fire({
             icon: "success",
-            title: "Tipo de Área creada con exito",
+            title: "Tipo de Área creada con éxito",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -262,16 +261,6 @@ form.addEventListener("submit", function (event) {
   }
 });
 
-// function poblarListas() {
-//     var $country = document.getElementById("country");
-//     axios.get("../../brands-gestion/countries/get-all/").then(function (response) {
-//         response.data.results.forEach(function (element) {
-//             var option = new Option(element.name, element.id);
-//             $country.add(option);
-//         });
-//     });
-
-// }
 
 function function_delete(id, name) {
   const table = $("#tabla-de-Datos").DataTable();

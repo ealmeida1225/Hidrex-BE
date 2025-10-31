@@ -14,4 +14,4 @@ class Pluviometer(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return f"{self.station_name} ({self.name})"

@@ -51,10 +51,15 @@ urlpatterns = [
     path("index/", pages.index, name="index"),
     path("", pages.index, name="index"),
     path("area_type/", pages.area_type, name="area_type"),
+    path("pluviometer_type/", pages.pluviometer_type, name="pluviometer_type"),
     path("areas/", pages.areas, name="areas"),
+    path("area_node/", pages.area_node, name="area_node"),
+    path("pluviometer/", pages.pluviometer, name="pluviometer"),
     path("shops/", pages.shops, name="shops"),
     path("products/", pages.products, name="products"),
-    path("shop_products/", pages.shop_products, name="shop_products"),
+    path("registers/", pages.registers, name="registers"),
+    path("month_statistics/", pages.month_statistics, name="month_statistics"),
+    path("diary_precipitation_classification/", pages.diary_precipitation_classification, name="diary_precipitation_classification"),
 ]
 
 # This is for serving media on development stages

@@ -5,7 +5,7 @@ const csrfToken = document.cookie
   ?.split("=")[1];
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
-const url = "/business-gestion/shops/";
+const url = "/business-gestion/register/";
 
 $(function () {
   bsCustomFileInput.init();
@@ -20,9 +20,9 @@ $(document).ready(function () {
       buttons: [
         {
           text: "Crear",
-          className: " btn btn-primary btn-info",
+          className: "btn btn-primary btn-info",
           action: function (e, dt, node, config) {
-            $("#modal-crear-shops").modal("show");
+            $("#modal-create-registers").modal("show");
           },
         },
         {
@@ -38,7 +38,7 @@ $(document).ready(function () {
           text: "Print",
         },
       ],
-      //Adding server-side processing
+      // Adding server-side processing
       serverSide: true,
       search: {
         return: true,
@@ -72,24 +72,18 @@ $(document).ready(function () {
           });
       },
       columns: [
-        { data: "name", title: "Nombre" },
-        {
-          data: "logo",
-          title: "Logo",
-          render: (data) => {
-            return `<img src="${data}" alt="Logo" style="width: 50px; height: auto;">`;
-          },
-        },
-        { data: "extra_info", title: "Información Extra" },
+        { data: "pluviometer_name", title: "Pluviómetro" },
+        { data: "register_date", title: "Fecha" },
+        { data: "rain_value", title: "Valor registrado" },
         {
           data: "",
           title: "Acciones",
           render: (data, type, row) => {
             return `<div class="btn-group">
-                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-crear-shops" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
+                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-registers" data-id="${row.id}" data-type="edit" data-name="${row.pluviometer}" id="${row.id}">
                           <i class="fas fa-edit"></i>
                         </button>  
-                        <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
+                        <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.product}')" >
                           <i class="fas fa-trash"></i>
                         </button>                                          
                       </div>`;
@@ -103,41 +97,43 @@ $(document).ready(function () {
 
 let selected_id;
 
-$("#modal-crear-shops").on("hide.bs.modal", (event) => {
+$("#modal-create-registers").on("hide.bs.modal", (event) => {
   const form = event.currentTarget.querySelector("form");
   form.reset();
-  edit_shops = false;
+  edit_register = false;
   const elements = [...form.elements];
   elements.forEach((elem) => elem.classList.remove("is-invalid"));
 });
 
-let edit_shops = false;
-$("#modal-crear-shops").on("show.bs.modal", function (event) {
+let edit_register = false;
+$("#modal-create-registers").on("show.bs.modal", function (event) {
   var button = $(event.relatedTarget); // Button that triggered the modal
 
   var modal = $(this);
   if (button.data("type") == "edit") {
     var dataName = button.data("name"); // Extract info from data-* attributes
     selected_id = button.data("id"); // Extract info from data-* attributes
-    edit_shops = true;
+    edit_register = true;
 
-    modal.find(".modal-title").text("Editar tienda " + dataName);
+    modal.find(".modal-title").text("Editar Registro diario " + dataName);
 
     // Realizar la petición con Axios
     axios
       .get(`${url}` + selected_id + "/")
       .then(function (response) {
         // Recibir la respuesta
-        const shops = response.data;
-        form.elements.name.value = shops.name;
-        form.elements.extra_info.value = shops.extra_info;
+        const registry = response.data;
+        form.elements.register_date.value = registry.register_date;
+        form.elements.rain_value.value = registry.rain_value;
+        form.elements.pluviometer.value = registry.pluviometer;
       })
       .catch(function (error) {});
   } else {
-    modal.find(".modal-title").text("Crear Tienda");
+    modal.find(".modal-title").text("Crear Registro diario");
   }
 });
 
+// form validator
 // form validator
 $(function () {
   $.validator.setDefaults({
@@ -147,15 +143,35 @@ $(function () {
     },
   });
 
-  $("#form-create-shops").validate({
+  $("#form-create-register").validate({
     rules: {
-      name: {
+      rain_value: {
         required: true,
+        number: true, // Solo números
+      },
+      register_date: {
+        required: true, // Campo no obligatorio
+      },
+      pluviometer: {
+        required: true, // Campo no obligatorio
+      },
+    },
+    messages: {
+      rain_value: {
+        required: "Este campo es obligatorio.",
+        digits: "Por favor, introduzca solo números.",
+      },
+      register_date: {
+        required: "Este campo es obligatorio.",
+        number: "Por favor, introduzca un número válido.",
+      },
+      pluviometer: {
+        required: "Este campo es obligatorio.",
+        number: "Por favor, introduzca un número válido.",
       },
     },
     submitHandler: function (form) {},
 
-    messages: {},
     errorElement: "span",
     errorPlacement: function (error, element) {
       error.addClass("invalid-feedback");
@@ -170,9 +186,9 @@ $(function () {
   });
 });
 
-// crear Tienda
+// crear Registro diario
 
-let form = document.getElementById("form-create-shops");
+let form = document.getElementById("form-create-register");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var table = $("#tabla-de-Datos").DataTable();
@@ -182,28 +198,25 @@ form.addEventListener("submit", function (event) {
     ?.split("=")[1];
   axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
   let data = new FormData();
-  data.append("name", document.getElementById("name").value);
+  data.append("pluviometer", document.getElementById("pluviometer").value);
+  data.append("rain_value", document.getElementById("rain_value").value);
+  data.append("register_date", document.getElementById("register_date").value);
 
-  if (document.getElementById("logo").files[0] != null) {
-    data.append("logo", document.getElementById("logo").files[0]);
-  }
-  data.append("extra_info", document.getElementById("extra_info").value);
-
-  if (edit_shops) {
+  if (edit_register) {
     axios
       .patch(`${url}` + selected_id + "/", data)
       .then((response) => {
         if (response.status === 200) {
-          $("#modal-crear-shops").modal("hide");
+          $("#modal-create-registers").modal("hide");
           Swal.fire({
             icon: "success",
-            title: "Tienda actualizada con éxito  ",
+            title: "Registro diario actualizada con éxito",
             showConfirmButton: false,
             timer: 1500,
           });
           table.ajax.reload();
 
-          edit_shops = false;
+          edit_register = false;
         }
       })
       .catch((error) => {
@@ -215,7 +228,7 @@ form.addEventListener("submit", function (event) {
 
         Swal.fire({
           icon: "error",
-          title: "Error al crear la Tienda",
+          title: "Error al crear la Registro diario",
           text: textError,
           showConfirmButton: false,
           timer: 1500,
@@ -228,12 +241,12 @@ form.addEventListener("submit", function (event) {
         if (response.status === 201) {
           Swal.fire({
             icon: "success",
-            title: "Tienda creada con éxito",
+            title: "Registro diario creada con éxito",
             showConfirmButton: false,
             timer: 1500,
           });
           table.ajax.reload();
-          $("#modal-crear-shops").modal("hide");
+          $("#modal-create-registers").modal("hide");
         }
       })
       .catch((error) => {
@@ -245,7 +258,7 @@ form.addEventListener("submit", function (event) {
 
         Swal.fire({
           icon: "error",
-          title: "Error al crear la Tienda",
+          title: "Error al crear la Registro diario",
           text: textError,
           showConfirmButton: false,
           timer: 1500,
@@ -255,19 +268,26 @@ form.addEventListener("submit", function (event) {
 });
 
 function poblarListas() {
-  // Puedes agregar la lógica para poblar listas aquí si es necesario
+  // Poblar la lista de tiendas
+  var $pluviometers = document.getElementById("pluviometer");
+  axios.get("/business-gestion/pluviometer/").then(function (response) {
+    response.data.results.forEach(function (element) {
+      var option = new Option(element.__str__, element.id);
+      $pluviometers.add(option);
+    });
+  });
 }
 
 function function_delete(id, name) {
   const table = $("#tabla-de-Datos").DataTable();
   Swal.fire({
     title: "Eliminar",
-    text: `Esta seguro que desea eliminar el elemento ${name}?`,
+    text: `¿Está seguro que desea eliminar el elemento ${name}?`,
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Si, Eliminar",
+    confirmButtonText: "Sí, Eliminar",
   }).then((result) => {
     if (result.isConfirmed) {
       axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
@@ -279,7 +299,7 @@ function function_delete(id, name) {
             Swal.fire({
               icon: "success",
               title: "Eliminar Elemento",
-              text: "Elemento eliminado satisfactoriamente ",
+              text: "Elemento eliminado satisfactoriamente",
               showConfirmButton: false,
               timer: 1500,
             });

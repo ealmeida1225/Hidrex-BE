@@ -5,7 +5,7 @@ const csrfToken = document.cookie
   ?.split("=")[1];
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
-const url = "/business-gestion/shop-products/";
+const url = "/business-gestion/area-node/";
 
 $(function () {
   bsCustomFileInput.init();
@@ -20,9 +20,9 @@ $(document).ready(function () {
       buttons: [
         {
           text: "Crear",
-          className: "btn btn-primary btn-info",
+          className: " btn btn-primary btn-info",
           action: function (e, dt, node, config) {
-            $("#modal-crear-shop-products").modal("show");
+            $("#modal-create-area-node").modal("show");
           },
         },
         {
@@ -38,7 +38,7 @@ $(document).ready(function () {
           text: "Print",
         },
       ],
-      // Adding server-side processing
+      //Adding server-side processing
       serverSide: true,
       search: {
         return: true,
@@ -72,21 +72,20 @@ $(document).ready(function () {
           });
       },
       columns: [
-        { data: "shop.name", title: "Tienda" },
-        { data: "product.name", title: "Producto" },
-        { data: "quantity", title: "Cantidad" },
-        { data: "cost_price", title: "Precio de Costo" },
-        { data: "sell_price", title: "Precio de Venta" },
-        { data: "extra_info", title: "Información Extra" },
+        { data: "area_name", title: "Área" },
+        { data: "lat", title: "Latitud" },
+        { data: "lon", title: "Longitud" },
+        { data: "step", title: "Orden de aparición" },
+
         {
           data: "",
           title: "Acciones",
           render: (data, type, row) => {
             return `<div class="btn-group">
-                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-crear-shop-products" data-id="${row.id}" data-type="edit" data-name="${row.product}" id="${row.id}">
+                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-area-node" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
                           <i class="fas fa-edit"></i>
                         </button>  
-                        <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.product}')" >
+                        <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
                           <i class="fas fa-trash"></i>
                         </button>                                          
                       </div>`;
@@ -100,46 +99,47 @@ $(document).ready(function () {
 
 let selected_id;
 
-$("#modal-crear-shop-products").on("hide.bs.modal", (event) => {
+$("#modal-create-area-node").on("hide.bs.modal", (event) => {
   const form = event.currentTarget.querySelector("form");
   form.reset();
-  edit_shopProducts = false;
+  edit_area_node = false;
   const elements = [...form.elements];
   elements.forEach((elem) => elem.classList.remove("is-invalid"));
 });
 
-let edit_shopProducts = false;
-$("#modal-crear-shop-products").on("show.bs.modal", function (event) {
+let edit_area_node = false;
+$("#modal-create-area-node").on("show.bs.modal", function (event) {
   var button = $(event.relatedTarget); // Button that triggered the modal
 
   var modal = $(this);
   if (button.data("type") == "edit") {
     var dataName = button.data("name"); // Extract info from data-* attributes
     selected_id = button.data("id"); // Extract info from data-* attributes
-    edit_shopProducts = true;
+    edit_area_node = true;
 
-    modal.find(".modal-title").text("Editar Entrada de Producto " + dataName);
+    modal.find(".modal-title").text("Editar " + dataName);
 
     // Realizar la petición con Axios
     axios
       .get(`${url}` + selected_id + "/")
       .then(function (response) {
         // Recibir la respuesta
-        const shopProduct = response.data;
-        form.elements.quantity.value = shopProduct.quantity;
-        form.elements.cost_price.value = shopProduct.cost_price;
-        form.elements.sell_price.value = shopProduct.sell_price;
-        form.elements.extra_info.value = shopProduct.extra_info;
-        form.elements.shop.value = shopProduct.shop;
-        form.elements.product.value = shopProduct.product;
+        const selected_area_node = response.data;
+        console.log(form.elements);
+
+        form.elements.area.value = selected_area_node.area;
+        form.elements.lat.value = selected_area_node.lat;
+        form.elements.lon.value = selected_area_node.lon;
+        form.elements.step.value = selected_area_node.step;
+
+        // document.getElementById("selectbrands").select= models.brand;
       })
       .catch(function (error) {});
   } else {
-    modal.find(".modal-title").text("Crear Entrada de Producto");
+    modal.find(".modal-title").text("Crear");
   }
 });
 
-// form validator
 // form validator
 $(function () {
   $.validator.setDefaults({
@@ -149,43 +149,15 @@ $(function () {
     },
   });
 
-  $("#form-create-shop-products").validate({
+  $("#form-create-area-node").validate({
     rules: {
-      quantity: {
+      name: {
         required: true,
-        digits: true, // Solo números
-      },
-      cost_price: {
-        required: true,
-        number: true, // Solo números
-      },
-      sell_price: {
-        required: true,
-        number: true, // Solo números
-        greaterThan: "#cost_price", // El precio de venta debe ser mayor que el precio de costo
-      },
-      extra_info: {
-        required: false, // Campo no obligatorio
-      },
-    },
-    messages: {
-      quantity: {
-        required: "Este campo es obligatorio.",
-        digits: "Por favor, introduzca solo números.",
-      },
-      cost_price: {
-        required: "Este campo es obligatorio.",
-        number: "Por favor, introduzca un número válido.",
-      },
-      sell_price: {
-        required: "Este campo es obligatorio.",
-        number: "Por favor, introduzca un número válido.",
-        greaterThan:
-          "El precio de venta debe ser mayor que el precio de costo.",
       },
     },
     submitHandler: function (form) {},
 
+    messages: {},
     errorElement: "span",
     errorPlacement: function (error, element) {
       error.addClass("invalid-feedback");
@@ -200,18 +172,9 @@ $(function () {
   });
 });
 
-// Método para validar que el precio de venta sea mayor que el precio de costo
-$.validator.addMethod(
-  "greaterThan",
-  function (value, element, param) {
-    return this.optional(element) || Number(value) > Number($(param).val());
-  },
-  "El precio de venta debe ser mayor que el precio de costo."
-);
+// crear Modelo
 
-// crear Entrada de Producto
-
-let form = document.getElementById("form-create-shop-products");
+let form = document.getElementById("form-create-area-node");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var table = $("#tabla-de-Datos").DataTable();
@@ -221,28 +184,26 @@ form.addEventListener("submit", function (event) {
     ?.split("=")[1];
   axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
   let data = new FormData();
-  data.append("shop", document.getElementById("shop").value);
-  data.append("product", document.getElementById("product").value);
-  data.append("quantity", document.getElementById("quantity").value);
-  data.append("cost_price", document.getElementById("cost_price").value);
-  data.append("sell_price", document.getElementById("sell_price").value);
-  data.append("extra_info", document.getElementById("extra_info").value);
+  data.append("area", document.getElementById("area").value);
+  data.append("lat", document.getElementById("lat").value);
+  data.append("lon", document.getElementById("lon").value);
+  data.append("step", document.getElementById("step").value);
 
-  if (edit_shopProducts) {
+  if (edit_area_node) {
     axios
       .patch(`${url}` + selected_id + "/", data)
       .then((response) => {
         if (response.status === 200) {
-          $("#modal-crear-shop-products").modal("hide");
+          $("#modal-create-area-node").modal("hide");
           Swal.fire({
             icon: "success",
-            title: "Entrada de Producto actualizada con éxito",
+            title: "Actualizado con éxito  ",
             showConfirmButton: false,
             timer: 1500,
           });
           table.ajax.reload();
 
-          edit_shopProducts = false;
+          edit_area_node = false;
         }
       })
       .catch((error) => {
@@ -254,7 +215,7 @@ form.addEventListener("submit", function (event) {
 
         Swal.fire({
           icon: "error",
-          title: "Error al crear la Entrada de Producto",
+          title: "Error al crear",
           text: textError,
           showConfirmButton: false,
           timer: 1500,
@@ -267,12 +228,12 @@ form.addEventListener("submit", function (event) {
         if (response.status === 201) {
           Swal.fire({
             icon: "success",
-            title: "Entrada de Producto creada con éxito",
+            title: "Nodo de área creado con éxito",
             showConfirmButton: false,
             timer: 1500,
           });
           table.ajax.reload();
-          $("#modal-crear-shop-products").modal("hide");
+          $("#modal-create-area-node").modal("hide");
         }
       })
       .catch((error) => {
@@ -284,7 +245,7 @@ form.addEventListener("submit", function (event) {
 
         Swal.fire({
           icon: "error",
-          title: "Error al crear la Entrada de Producto",
+          title: "Error al crear",
           text: textError,
           showConfirmButton: false,
           timer: 1500,
@@ -294,21 +255,11 @@ form.addEventListener("submit", function (event) {
 });
 
 function poblarListas() {
-  // Poblar la lista de tiendas
-  var $shop = document.getElementById("shop");
-  axios.get("/business-gestion/shops/").then(function (response) {
+  var area = document.getElementById("area");
+  axios.get("../../business-gestion/area/").then(function (response) {
     response.data.results.forEach(function (element) {
       var option = new Option(element.name, element.id);
-      $shop.add(option);
-    });
-  });
-
-  // Poblar la lista de productos
-  var $product = document.getElementById("product");
-  axios.get("/business-gestion/products/").then(function (response) {
-    response.data.results.forEach(function (element) {
-      var option = new Option(element.name, element.id);
-      $product.add(option);
+      area.add(option);
     });
   });
 }
@@ -317,12 +268,12 @@ function function_delete(id, name) {
   const table = $("#tabla-de-Datos").DataTable();
   Swal.fire({
     title: "Eliminar",
-    text: `¿Está seguro que desea eliminar el elemento ${name}?`,
+    text: `Esta seguro que desea eliminar el elemento ${name}?`,
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Sí, Eliminar",
+    confirmButtonText: "Si, Eliminar",
   }).then((result) => {
     if (result.isConfirmed) {
       axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
@@ -334,7 +285,7 @@ function function_delete(id, name) {
             Swal.fire({
               icon: "success",
               title: "Eliminar Elemento",
-              text: "Elemento eliminado satisfactoriamente",
+              text: "Elemento eliminado satisfactoriamente ",
               showConfirmButton: false,
               timer: 1500,
             });

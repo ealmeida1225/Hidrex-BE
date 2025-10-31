@@ -234,7 +234,7 @@ form.addEventListener("submit", function (event) {
         if (response.status === 201) {
           Swal.fire({
             icon: "success",
-            title: "Modelo creado con exito",
+            title: "Área creada con éxito",
             showConfirmButton: false,
             timer: 1500,
           });

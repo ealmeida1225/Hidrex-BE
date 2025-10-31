@@ -5,7 +5,7 @@ const csrfToken = document.cookie
   ?.split("=")[1];
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
-const url = "/business-gestion/shops/";
+const url = "/business-gestion/pluviometer/";
 
 $(function () {
   bsCustomFileInput.init();
@@ -22,7 +22,7 @@ $(document).ready(function () {
           text: "Crear",
           className: " btn btn-primary btn-info",
           action: function (e, dt, node, config) {
-            $("#modal-crear-shops").modal("show");
+            $("#modal-create-pluviometer").modal("show");
           },
         },
         {
@@ -73,20 +73,18 @@ $(document).ready(function () {
       },
       columns: [
         { data: "name", title: "Nombre" },
-        {
-          data: "logo",
-          title: "Logo",
-          render: (data) => {
-            return `<img src="${data}" alt="Logo" style="width: 50px; height: auto;">`;
-          },
-        },
-        { data: "extra_info", title: "Información Extra" },
+        { data: "pluviometer_type_name", title: "Tipo" },
+        { data: "station_name", title: "Nombre de la estación" },
+        { data: "lat", title: "Latitud" },
+        { data: "lon", title: "Longitud" },
+        { data: "msnm", title: "Metros sobre nivel del mar" },
+
         {
           data: "",
           title: "Acciones",
           render: (data, type, row) => {
             return `<div class="btn-group">
-                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-crear-shops" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
+                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-pluviometer" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
                           <i class="fas fa-edit"></i>
                         </button>  
                         <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
@@ -103,38 +101,46 @@ $(document).ready(function () {
 
 let selected_id;
 
-$("#modal-crear-shops").on("hide.bs.modal", (event) => {
+$("#modal-create-pluviometer").on("hide.bs.modal", (event) => {
   const form = event.currentTarget.querySelector("form");
   form.reset();
-  edit_shops = false;
+  edit_pluviometer = false;
   const elements = [...form.elements];
   elements.forEach((elem) => elem.classList.remove("is-invalid"));
 });
 
-let edit_shops = false;
-$("#modal-crear-shops").on("show.bs.modal", function (event) {
+let edit_pluviometer = false;
+$("#modal-create-pluviometer").on("show.bs.modal", function (event) {
   var button = $(event.relatedTarget); // Button that triggered the modal
 
   var modal = $(this);
   if (button.data("type") == "edit") {
     var dataName = button.data("name"); // Extract info from data-* attributes
     selected_id = button.data("id"); // Extract info from data-* attributes
-    edit_shops = true;
+    edit_pluviometer = true;
 
-    modal.find(".modal-title").text("Editar tienda " + dataName);
+    modal.find(".modal-title").text("Editar " + dataName);
 
     // Realizar la petición con Axios
     axios
       .get(`${url}` + selected_id + "/")
       .then(function (response) {
         // Recibir la respuesta
-        const shops = response.data;
-        form.elements.name.value = shops.name;
-        form.elements.extra_info.value = shops.extra_info;
+        const selected_pluviometer = response.data;
+        console.log(form.elements);
+
+        form.elements.name.value = selected_pluviometer.name;
+        form.elements.station_name.value = selected_pluviometer.station_name;
+        form.elements.pluviometer_type.value = selected_pluviometer.pluviometer_type;
+        form.elements.lat.value = selected_pluviometer.lat;
+        form.elements.lon.value = selected_pluviometer.lon;
+        form.elements.msnm.value = selected_pluviometer.msnm;
+
+        // document.getElementById("selectbrands").select= models.brand;
       })
       .catch(function (error) {});
   } else {
-    modal.find(".modal-title").text("Crear Tienda");
+    modal.find(".modal-title").text("Crear");
   }
 });
 
@@ -147,7 +153,7 @@ $(function () {
     },
   });
 
-  $("#form-create-shops").validate({
+  $("#form-create-pluviometer").validate({
     rules: {
       name: {
         required: true,
@@ -170,9 +176,9 @@ $(function () {
   });
 });
 
-// crear Tienda
+// crear Modelo
 
-let form = document.getElementById("form-create-shops");
+let form = document.getElementById("form-create-pluviometer");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var table = $("#tabla-de-Datos").DataTable();
@@ -183,27 +189,27 @@ form.addEventListener("submit", function (event) {
   axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
   let data = new FormData();
   data.append("name", document.getElementById("name").value);
+  data.append("station_name", document.getElementById("station_name").value);
+  data.append("lat", document.getElementById("lat").value);
+  data.append("lon", document.getElementById("lon").value);
+  data.append("pluviometer_type", document.getElementById("pluviometer_type").value);
+  data.append("msnm", document.getElementById("msnm").value);
 
-  if (document.getElementById("logo").files[0] != null) {
-    data.append("logo", document.getElementById("logo").files[0]);
-  }
-  data.append("extra_info", document.getElementById("extra_info").value);
-
-  if (edit_shops) {
+  if (edit_pluviometer) {
     axios
       .patch(`${url}` + selected_id + "/", data)
       .then((response) => {
         if (response.status === 200) {
-          $("#modal-crear-shops").modal("hide");
+          $("#modal-create-pluviometer").modal("hide");
           Swal.fire({
             icon: "success",
-            title: "Tienda actualizada con éxito  ",
+            title: "Actualizado con éxito  ",
             showConfirmButton: false,
             timer: 1500,
           });
           table.ajax.reload();
 
-          edit_shops = false;
+          edit_pluviometer = false;
         }
       })
       .catch((error) => {
@@ -215,7 +221,7 @@ form.addEventListener("submit", function (event) {
 
         Swal.fire({
           icon: "error",
-          title: "Error al crear la Tienda",
+          title: "Error al crear",
           text: textError,
           showConfirmButton: false,
           timer: 1500,
@@ -228,12 +234,12 @@ form.addEventListener("submit", function (event) {
         if (response.status === 201) {
           Swal.fire({
             icon: "success",
-            title: "Tienda creada con éxito",
+            title: "Pluviómetro creado con éxito",
             showConfirmButton: false,
             timer: 1500,
           });
           table.ajax.reload();
-          $("#modal-crear-shops").modal("hide");
+          $("#modal-create-pluviometer").modal("hide");
         }
       })
       .catch((error) => {
@@ -245,7 +251,7 @@ form.addEventListener("submit", function (event) {
 
         Swal.fire({
           icon: "error",
-          title: "Error al crear la Tienda",
+          title: "Error al crear",
           text: textError,
           showConfirmButton: false,
           timer: 1500,
@@ -255,7 +261,13 @@ form.addEventListener("submit", function (event) {
 });
 
 function poblarListas() {
-  // Puedes agregar la lógica para poblar listas aquí si es necesario
+  var $pluviometer_types = document.getElementById("pluviometer_type");
+  axios.get("../../business-gestion/pluviometer-type/").then(function (response) {
+    response.data.results.forEach(function (element) {
+      var option = new Option(element.name, element.id);
+      $pluviometer_types.add(option);
+    });
+  });
 }
 
 function function_delete(id, name) {

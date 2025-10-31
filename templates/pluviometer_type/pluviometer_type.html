@@ -20,12 +20,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Entrada de Producto</h1>
+          <h1>Tipos de Pluviómetro</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-            <li class="breadcrumb-item active">Entradas de Producto</li>
+            <li class="breadcrumb-item active">Tipos de Pluviómetro</li>
           </ol>
         </div>
       </div>
@@ -38,14 +38,19 @@
       <div class="row">
         <div class="col-12">
 
+
+
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Gestionar Entrada de Producto</h3>
+
+              <h3 class="card-title">Gestionar Tipo de Pluviómetro</h3>
             </div>
             <!-- /.card-header -->
             <div class="modal-body">
 
+              <!-- </div>style="overflow: hidden;"> -->
               <table id="tabla-de-Datos" class="table table-bordered table-striped" style="width: 100%;">
+
               </table>
             </div>
             <!-- /.card-body -->
@@ -62,66 +67,49 @@
 </div>
 <!-- /.content-wrapper -->
 
-<!-- modal para crear entrada de producto -->
-<div class="modal fade" id="modal-crear-shop-products" data-backdrop="static" tabindex="-1" role="dialog"
+<!-- modal para crear usuario -->
+<div class="modal fade" id="modal-create-pluviometer-type" data-backdrop="static" tabindex="-1" role="dialog"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Adicionar Entrada de Producto</h4>
+        <h4 class="modal-title">Adicionar tipo de Pluviómetro</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
-      <form id="form-create-shop-products">
+      <form id="form-create-pluviometer-type">
         <div class="card-body">
 
           <div class="row">
-            <div class="form-group col-sm-6">
-              <label for="shop">Tienda</label>
-              <select class="form-control" id="shop" name="shop" tabindex="-1"></select>
+            <div class="form-group col-md-6">
+              <label for="name">Nombre</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Entre el nombre"
+                required>
+            </div>                     
+            <div class="form-group col-md-6">
+              <label for="description">Descripción</label>
+              <input type="text" class="form-control" id="description" name="description" placeholder="Descripción"
+                required>
             </div>
-            <div class="form-group col-sm-6">
-              <label for="product">Producto</label>
-              <select class="form-control" id="product" name="product" tabindex="-1"></select>
-            </div>
-          </div>
 
-          <div class="form-group">
-            <label>Cantidad</label>
-            <input type="number" class="form-control" id="quantity" name="quantity" required>
-          </div>
-
-          <div class="form-group">
-            <label>Precio de Costo</label>
-            <input type="text" class="form-control" id="cost_price" name="cost_price" required>
-          </div>
-
-          <div class="form-group">
-            <label>Precio de Venta</label>
-            <input type="text" class="form-control" id="sell_price" name="sell_price" required>
-          </div>
-
-          <div class="form-group">
-            <label>Extra</label>
-            <textarea class="form-control" rows="3" id="extra_info" name="extra_info" placeholder="Enter ..."></textarea>
           </div>
 
         </div>
-
         <!-- /.card-body -->
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-primary">Enviar</button>
         </div>
-
-      </form>
-
     </div>
+
+    </form>
+
   </div>
 
 </div>
+
 <!-- /.modal-content -->
 </div>
 <!-- /.modal-dialog -->
@@ -148,5 +136,10 @@
 <script src="{% static 'assets/plugins/jquery-validation/localization/messages_es.js' %}"></script>
 <script src="{% static 'assets/dist/js/axios.min.js' %}"></script>
 
-<script src="{% static 'assets/dist/js/shop_products.js' %}"></script>
+<script src="{% static 'assets/dist/js/pluviometer_type.js' %}"></script>
+<script src="{% static 'assets/plugins/select2/js/select2.full.min.js' %}"></script>
+
+<!-- Page specific script -->
+
+
 {% endblock %}

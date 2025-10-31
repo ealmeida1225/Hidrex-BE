@@ -10,6 +10,7 @@ from apps.business_app.views.diary_precipitation_classification import (
 from apps.business_app.views.month_statistics import MonthStatisticsViewSet
 from apps.business_app.views.pluviometer import PluviometerViewSet
 from apps.business_app.views.pluviometer_area import PluviometerAreaViewSet
+from apps.business_app.views.pluviometer_type import PluviometerTypeViewSet
 from apps.business_app.views.precipitation_concentration_index_by_area import (
     PrecipitationConcentrationIndexByAreaViewSet,
 )
@@ -53,6 +54,11 @@ router.register(
     "pluviometer",
     PluviometerViewSet,
     basename="pluviometer",
+)
+router.register(
+    "pluviometer-type",
+    PluviometerTypeViewSet,
+    basename="pluviometer-type",
 )
 router.register(
     "area-type",

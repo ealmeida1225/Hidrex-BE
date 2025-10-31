@@ -432,7 +432,7 @@ form.addEventListener('submit', function (event) {
 
                     Swal.fire({
                         icon: "success",
-                        title: "Usuario creado con exito",
+                        title: "Usuario creado con éxito",
                         showConfirmButton: false,
                         timer: 1500
                     });

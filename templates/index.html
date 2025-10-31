@@ -188,6 +188,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="{% url 'pluviometer_type' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Tipos de Pluviómetro{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'pluviometer' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Pluviómetros{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{% url 'area_type' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Tipos de Área{% endblocktranslate %}</p>
@@ -200,9 +212,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="{% url 'area_node' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Nodos de áreas{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{% url 'shops' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Tiendas{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'diary_precipitation_classification' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Clasificación de precipitaciones diarias{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'month_statistics' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Estadísticas Mensuales{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -212,9 +242,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'shop_products' %}" class="nav-link">
+                  <a href="{% url 'registers' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>{% blocktranslate %}Entrada{% endblocktranslate %}</p>
+                    <p>{% blocktranslate %}Registros diarios{% endblocktranslate %}</p>
                   </a>
                 </li>
                

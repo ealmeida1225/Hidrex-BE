@@ -23,8 +23,27 @@ def area_type(request):
     return render(request, "area_type/area_type.html")
 
 
+def pluviometer_type(request):
+    return render(request, "pluviometer_type/pluviometer_type.html")
+
+
 def areas(request):
     return render(request, "areas/areas.html")
+
+
+def area_node(request):
+    return render(request, "area_node/area_node.html")
+
+def month_statistics(request):
+    return render(request, "month_statistics/month_statistics.html")
+
+
+def pluviometer(request):
+    return render(request, "pluviometer/pluviometer.html")
+
+
+def diary_precipitation_classification(request):
+    return render(request, "diary_precipitation_classification/diary_precipitation_classification.html")
 
 
 def shops(request):
@@ -35,5 +54,5 @@ def products(request):
     return render(request, "products/products.html")
 
 
-def shop_products(request):
-    return render(request, "shop_products/shop_products.html")
+def registers(request):
+    return render(request, "registers/registers.html")

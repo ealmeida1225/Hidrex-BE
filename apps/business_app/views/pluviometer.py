@@ -16,7 +16,7 @@ class PluviometerViewSet(viewsets.ModelViewSet, GenericAPIView):
     API endpoint that allows file upload extensions added or edited.
     """
 
-    queryset = Pluviometer.objects.all()
+    queryset = Pluviometer.objects.all().select_related("pluviometer_type")
     serializer_class = PluviometerSerializer
     ordering_fields = "__all__"
     filter_backends = [

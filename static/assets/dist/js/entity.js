@@ -267,7 +267,7 @@ form.addEventListener('submit', function (event) {
 
                     Swal.fire({
                         icon: "success",
-                        title: "Elemento creado con exito",
+                        title: "Elemento creado con éxito",
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -300,7 +300,7 @@ form.addEventListener('submit', function (event) {
 
                     Swal.fire({
                         icon: "success",
-                        title: "Elemento creado con exito",
+                        title: "Elemento creado con éxito",
                         showConfirmButton: false,
                         timer: 1500
                     });
