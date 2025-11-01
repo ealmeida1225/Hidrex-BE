@@ -22,7 +22,11 @@ class PrecipitationConcentrationIndexByPluviometerViewSet(
     API endpoint that allows file upload extensions added or edited.
     """
 
-    queryset = PrecipitationConcentrationIndexByPluviometer.objects.all()
+    queryset = (
+        PrecipitationConcentrationIndexByPluviometer.objects.all().select_related(
+            "pluviometer"
+        )
+    )
     serializer_class = PrecipitationConcentrationIndexByPluviometerSerializer
     ordering_fields = "__all__"
     filter_backends = [

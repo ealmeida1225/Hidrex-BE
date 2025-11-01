@@ -3,9 +3,7 @@ from rest_framework import filters, permissions, viewsets
 from rest_framework.generics import GenericAPIView
 
 
-from apps.business_app.models.pluviometer import Pluviometer
 from apps.business_app.models.pluviometer_type import PluviometerType
-from apps.business_app.serializers.pluviometer import PluviometerSerializer
 from apps.business_app.serializers.pluviometer_type import PluviometerTypeSerializer
 from apps.common.mixins.common_view_mixin import CommonOrderingFilter
 

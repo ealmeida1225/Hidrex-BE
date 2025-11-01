@@ -21,6 +21,7 @@ class AreaSerializer(serializers.ModelSerializer):
             "description",
             "centroid_lat",
             "centroid_lon",
+            "__str__",
         ]
 
     def get_area_type_name(self, object):

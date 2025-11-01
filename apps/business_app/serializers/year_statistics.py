@@ -8,7 +8,9 @@ logger = logging.getLogger(__name__)
 
 
 class YearStatisticsSerializer(serializers.ModelSerializer):
-    pluviometer_name = serializers.CharField(source="pluviometer.__str__", read_only = True)
+    pluviometer_name = serializers.CharField(
+        source="pluviometer.__str__", read_only=True
+    )
 
     class Meta:
         model = YearStatistics
@@ -23,5 +25,5 @@ class YearStatisticsSerializer(serializers.ModelSerializer):
             "rainy_days_count",
             "rainy_streak_count",
             "rainy_streak_med_long",
-            "__str__"
+            "__str__",
         ]

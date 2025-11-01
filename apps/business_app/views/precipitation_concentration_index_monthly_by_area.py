@@ -22,7 +22,11 @@ class PrecipitationConcentrationIndexMonthlyByAreaViewSet(
     API endpoint that allows file upload extensions added or edited.
     """
 
-    queryset = PrecipitationConcentrationIndexMonthlyByArea.objects.all()
+    queryset = (
+        PrecipitationConcentrationIndexMonthlyByArea.objects.all().select_related(
+            "area"
+        )
+    )
     serializer_class = PrecipitationConcentrationIndexMonthlyByAreaSerializer
     ordering_fields = "__all__"
     filter_backends = [

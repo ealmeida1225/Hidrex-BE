@@ -53,14 +53,39 @@ urlpatterns = [
     path("area_type/", pages.area_type, name="area_type"),
     path("pluviometer_type/", pages.pluviometer_type, name="pluviometer_type"),
     path("areas/", pages.areas, name="areas"),
+    path(
+        "precipitation_concentration_index_by_area/",
+        pages.precipitation_concentration_index_by_area,
+        name="precipitation_concentration_index_by_area",
+    ),
+    path(
+        "precipitation_concentration_index_by_pluviometer/",
+        pages.precipitation_concentration_index_by_pluviometer,
+        name="precipitation_concentration_index_by_pluviometer",
+    ),
+    path(
+        "precipitation_concentration_index_monthly_by_area/",
+        pages.precipitation_concentration_index_monthly_by_area,
+        name="precipitation_concentration_index_monthly_by_area",
+    ),
+    path(
+        "precipitation_concentration_index_monthly_by_pluviometer/",
+        pages.precipitation_concentration_index_monthly_by_pluviometer,
+        name="precipitation_concentration_index_monthly_by_pluviometer",
+    ),
     path("area_node/", pages.area_node, name="area_node"),
     path("pluviometer/", pages.pluviometer, name="pluviometer"),
+    path("pluviometer_area/", pages.pluviometer_area, name="pluviometer_area"),
     path("shops/", pages.shops, name="shops"),
     path("products/", pages.products, name="products"),
     path("registers/", pages.registers, name="registers"),
     path("year_statistics/", pages.year_statistics, name="year_statistics"),
     path("month_statistics/", pages.month_statistics, name="month_statistics"),
-    path("diary_precipitation_classification/", pages.diary_precipitation_classification, name="diary_precipitation_classification"),
+    path(
+        "diary_precipitation_classification/",
+        pages.diary_precipitation_classification,
+        name="diary_precipitation_classification",
+    ),
 ]
 
 # This is for serving media on development stages

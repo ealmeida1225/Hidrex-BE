@@ -8,7 +8,10 @@ logger = logging.getLogger(__name__)
 
 
 class RegistersSerializer(serializers.ModelSerializer):
-    pluviometer_name = serializers.CharField(source="pluviometer.__str__", read_only = True)
+    pluviometer_name = serializers.CharField(
+        source="pluviometer.__str__", read_only=True
+    )
+
     class Meta:
         model = Registers
         fields = [

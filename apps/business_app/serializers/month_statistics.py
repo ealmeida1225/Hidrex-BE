@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 class MonthStatisticsSerializer(serializers.ModelSerializer):
-    year_name = serializers.CharField(source="year.__str__", read_only = True)
+    year_name = serializers.CharField(source="year.__str__", read_only=True)
 
     class Meta:
         model = MonthStatistics

@@ -14,7 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="{% static 'assets/dist/img/AdminLTELogo.png' %}">
-  <title>MM Auto Part</title>
+  <title>HIDREX</title>
 
   <!-- Google Font: Source Sans Pro -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
@@ -138,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <a href="" class="brand-link">
         <img src="{% static 'assets/dist/img/AdminLTELogo.png' %}" alt="PGX Logo" class="brand-image  elevation-3"
           style="opacity: .8">
-        <span class="brand-text font-weight-light">MM Auto Part</span>
+        <span class="brand-text font-weight-light">HIDREX</span>
       </a>
 
       <!-- Sidebar -->
@@ -200,6 +200,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="{% url 'pluviometer_area' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Pluviómetros por área{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{% url 'area_type' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Tipos de Área{% endblocktranslate %}</p>
@@ -209,6 +215,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <a href="{% url 'areas' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Áreas{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'precipitation_concentration_index_by_area' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Índice de concentración de precipitaciones por área{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'precipitation_concentration_index_monthly_by_area' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Índice de concentración de precipitaciones mensuales por área{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'precipitation_concentration_index_by_pluviometer' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Índice de concentración de precipitaciones por pluviómetro{% endblocktranslate %}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'precipitation_concentration_index_monthly_by_pluviometer' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{% blocktranslate %}Índice de concentración de precipitaciones mensuales por pluviómetro{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">

@@ -2,7 +2,6 @@ from rest_framework import serializers
 
 import logging
 
-from apps.business_app.models.pluviometer import Pluviometer
 from apps.business_app.models.pluviometer_type import PluviometerType
 
 logger = logging.getLogger(__name__)

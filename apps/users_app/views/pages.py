@@ -31,11 +31,41 @@ def areas(request):
     return render(request, "areas/areas.html")
 
 
+def precipitation_concentration_index_by_area(request):
+    return render(
+        request,
+        "precipitation_concentration_index_by_area/precipitation_concentration_index_by_area.html",
+    )
+
+
+def precipitation_concentration_index_by_pluviometer(request):
+    return render(
+        request,
+        "precipitation_concentration_index_by_pluviometer/precipitation_concentration_index_by_pluviometer.html",
+    )
+
+
+def precipitation_concentration_index_monthly_by_area(request):
+    return render(
+        request,
+        "precipitation_concentration_index_monthly_by_area/precipitation_concentration_index_monthly_by_area.html",
+    )
+
+
+def precipitation_concentration_index_monthly_by_pluviometer(request):
+    return render(
+        request,
+        "precipitation_concentration_index_monthly_by_pluviometer/precipitation_concentration_index_monthly_by_pluviometer.html",
+    )
+
+
 def area_node(request):
     return render(request, "area_node/area_node.html")
 
+
 def month_statistics(request):
     return render(request, "month_statistics/month_statistics.html")
+
 
 def year_statistics(request):
     return render(request, "year_statistics/year_statistics.html")
@@ -45,8 +75,15 @@ def pluviometer(request):
     return render(request, "pluviometer/pluviometer.html")
 
 
+def pluviometer_area(request):
+    return render(request, "pluviometer_area/pluviometer_area.html")
+
+
 def diary_precipitation_classification(request):
-    return render(request, "diary_precipitation_classification/diary_precipitation_classification.html")
+    return render(
+        request,
+        "diary_precipitation_classification/diary_precipitation_classification.html",
+    )
 
 
 def shops(request):

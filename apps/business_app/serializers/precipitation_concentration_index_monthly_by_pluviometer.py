@@ -12,11 +12,16 @@ logger = logging.getLogger(__name__)
 class PrecipitationConcentrationIndexMonthlyByPluviometerSerializer(
     serializers.ModelSerializer
 ):
+    pluviometer_name = serializers.CharField(
+        source="pluviometer.__str__", read_only=True
+    )
+
     class Meta:
         model = PrecipitationConcentrationIndexMonthlyByPluviometer
         fields = [
             "id",
             "pluviometer",
+            "pluviometer_name",
             "month",
             "years_considered",
             "a_value",

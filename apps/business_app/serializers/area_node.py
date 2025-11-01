@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 
 class AreaNodeSerializer(serializers.ModelSerializer):
     area_name = serializers.CharField(source="area.__str__")
+
     class Meta:
         model = AreaNode
         fields = [
