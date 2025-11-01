@@ -79,11 +79,11 @@ $(document).ready(function () {
         { data: "b_value", title: "Valor de b" },
         { data: "r_2_value", title: "Valor de r^2" },
         { data: "ci_value", title: "Índice de concentración de precipitaciones" },
-        { data: "rainy_days", title: "Días lluviosos" },
+        { data: "rainy_days", title: "Total de días con lluvia" },
         { data: "max_rain_value", title: "Mayor lluvia registrada" },
         { data: "rainy_days_percent", title: "% de días lluviosos" },
-        { data: "rain_by_period_avg", title: "Avg de lluvia diaria" },
-        { data: "rainy_days_by_period_avg", title: "Avg de días lluviosos" },
+        { data: "rain_by_period_avg", title: "mm promedio de lluvia diaria" },
+        { data: "rainy_days_by_period_avg", title: "Cant. Prom. de días con lluvias" },
         { data: "total_rain_value", title: "Total de días lluviosos" },
 
         {
