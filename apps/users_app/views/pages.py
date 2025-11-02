@@ -22,6 +22,9 @@ def register(request):
 def area_type(request):
     return render(request, "area_type/area_type.html")
 
+def map(request):
+    return render(request, "map/map.html")
+
 
 def pluviometer_type(request):
     return render(request, "pluviometer_type/pluviometer_type.html")

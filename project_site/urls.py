@@ -51,6 +51,7 @@ urlpatterns = [
     path("index/", pages.index, name="index"),
     path("", pages.index, name="index"),
     path("area_type/", pages.area_type, name="area_type"),
+    path("map/", pages.map, name="map"),
     path("pluviometer_type/", pages.pluviometer_type, name="pluviometer_type"),
     path("areas/", pages.areas, name="areas"),
     path(
