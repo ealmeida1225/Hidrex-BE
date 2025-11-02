@@ -10,12 +10,11 @@
 <link rel="stylesheet" href="{% static 'assets/plugins/select2/css/select2.min.css' %}">
 <link rel="stylesheet" href="{% static 'assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
 
-<link rel="stylesheet" href="{% static 'assets/dist/css/leaflet.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/dist/css/leaflet.css' %}">
 {% endblock %}
 
 {% block content %}
-<div id="map_id"></div>
-
+<div id="map_id" style="height: 100vh; width: 100%;"></div>
 
 {% endblock %}
 {% block script %} <!-- DataTables & Plugins -->
@@ -45,7 +44,11 @@
 
     let mymap = L.map('map_id').setView(
            [ 21.941415395551573,-78.66101966354675], 10);
-    L.tileLayer("{% static 'assets/tiles/{z}/{x}/{y}.png' %}",{ maxZoom: 12 }).addTo(mymap);
+
+    var tileUrl = "{% static 'assets/tiles/' %}";
+    console.log("URL generada por Django:", tileUrl+'{z}/{x}/{y}.png');  // Debería mostrar algo como "/static_output/assets/tiles/{z}/{x}/{y}.png"
+    L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap);
+    
     // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
 
 	</script>
