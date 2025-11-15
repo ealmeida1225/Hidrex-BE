@@ -16,7 +16,7 @@ class AreaViewSet(viewsets.ModelViewSet, GenericAPIView):
     API endpoint that allows file upload extensions added or edited.
     """
 
-    queryset = Area.objects.all().select_related("area_type")
+    queryset = Area.objects.all().select_related("area_type").prefetch_related("nodes")
     serializer_class = AreaSerializer
     ordering_fields = "__all__"
     filter_backends = [

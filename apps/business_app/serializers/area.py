@@ -3,12 +3,14 @@ from rest_framework import serializers
 import logging
 
 from apps.business_app.models.area import Area
+from apps.business_app.serializers.area_node import AreaNodeSerializer
 
 logger = logging.getLogger(__name__)
 
 
 class AreaSerializer(serializers.ModelSerializer):
     area_type_name = serializers.SerializerMethodField()
+    nodes=AreaNodeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Area
@@ -21,6 +23,7 @@ class AreaSerializer(serializers.ModelSerializer):
             "description",
             "centroid_lat",
             "centroid_lon",
+            "nodes",
             "__str__",
         ]
 

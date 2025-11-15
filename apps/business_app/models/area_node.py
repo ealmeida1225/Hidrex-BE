@@ -7,4 +7,4 @@ class AreaNode(models.Model):
     lat = models.FloatField()
     lon = models.FloatField()
     step = models.IntegerField()
-    area = models.ForeignKey(Area, models.CASCADE)
+    area = models.ForeignKey(Area, models.CASCADE, related_name="nodes")
