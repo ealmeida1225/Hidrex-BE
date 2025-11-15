@@ -48,8 +48,8 @@
            [ 21.941415395551573,-78.66101966354675], 10);
 
     var tileUrl = "{% static 'assets/tiles/' %}";
-    L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
+    // L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
 
     const pluviometer_url = "/business-gestion/pluviometer/";
     const pluviometer_year_url = "/business-gestion/pluviometer/";
