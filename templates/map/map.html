@@ -39,6 +39,8 @@
 <script src="{% static 'assets/dist/js/leaflet.js' %}"></script>
 <script src="{% static 'assets/plugins/select2/js/select2.full.min.js' %}"></script>
 
+
+
 <!-- Page specific script -->
     <script>
 
@@ -46,10 +48,41 @@
            [ 21.941415395551573,-78.66101966354675], 10);
 
     var tileUrl = "{% static 'assets/tiles/' %}";
-    console.log("URL generada por Django:", tileUrl+'{z}/{x}/{y}.png');  // Debería mostrar algo como "/static_output/assets/tiles/{z}/{x}/{y}.png"
-    L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap);
-    
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
+    L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
+
+    const pluviometer_url = "/business-gestion/pluviometer/";
+    const pluviometer_year_url = "/business-gestion/pluviometer/";
+    var pluv_data;
+    axios
+        .get(`${pluviometer_url}`, {
+        params: {},
+        })
+        .then((res) => {
+        pluv_data = res.data.results;
+        for (let pos = 0; pos < pluv_data.length; pos++) {
+            let pluv = pluv_data[pos];
+            if (pluv.lat != null) {
+            L.marker([pluv.lat, pluv.lon])
+                .addTo(mymap)
+                .on("mouseover", (e) => {
+                let marker = e.target;
+                marker.bindPopup(`<b>Pluviómetro</b>: ${pluv.name} (${pluv.station_name})<br>
+                                            <b>Altura sobre el mar</b>: ${pluv.msnm} metros<br>
+                                            <b>Latitud</b>: ${pluv.lat}<br>
+                                            <b>Longitud</b>: ${pluv.lon}<br>
+                                            `);
+                marker.openPopup();
+                })
+                .on("mouseout", (e) => {
+                e.target.closePopup();
+                });
+            }
+        }
+        })
+        .catch((error) => {
+        alert(error);
+        });
 
 	</script>
 
