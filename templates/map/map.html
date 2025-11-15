@@ -68,10 +68,10 @@
                 .on("mouseover", (e) => {
                 let marker = e.target;
                 marker.bindPopup(`<b>Pluviómetro</b>: ${pluv.name} (${pluv.station_name})<br>
-                                            <b>Altura sobre el mar</b>: ${pluv.msnm} metros<br>
-                                            <b>Latitud</b>: ${pluv.lat}<br>
-                                            <b>Longitud</b>: ${pluv.lon}<br>
-                                            `);
+                                <b>Altura sobre el mar</b>: ${pluv.msnm} metros<br>
+                                <b>Latitud</b>: ${pluv.lat}<br>
+                                <b>Longitud</b>: ${pluv.lon}<br>
+                                `);
                 marker.openPopup();
                 })
                 .on("mouseout", (e) => {
