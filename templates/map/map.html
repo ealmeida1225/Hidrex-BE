@@ -24,7 +24,7 @@
     // L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
 
-    const pluviometer_url = "/business-gestion/pluviometer/";
+    const pluviometer_url = "/business-gestion/pluviometer/?page_size=1000";
     var pluv_data;
     axios
         .get(`${pluviometer_url}`, {

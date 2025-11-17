@@ -84,16 +84,32 @@ $(document).ready(function () {
           data: "",
           title: "Acciones",
           render: (data, type, row) => {
+            // 1. Verificamos si lat o lon están vacíos, son nulos o undefined
+            const isMapDisabled = !row.lat || !row.lon;
+
+            // 2. Construimos el HTML del botón del mapa de forma condicional
+            let mapButtonHtml;
+            if (isMapDisabled) {
+              // Si no hay coordenadas, el botón se crea deshabilitado
+              mapButtonHtml = `<button type="button" title="Sin coordenadas" class="btn bg-olive disabled" disabled>
+                                  <i class="fas fa-map-marker-alt"></i>
+                              </button>`;
+            } else {
+              // Si hay coordenadas, el botón se crea normalmente
+              mapButtonHtml = `<button type="button" title="Ver en mapa" class="btn bg-olive" onclick="window.location.href='../map-pluviometer-page/${row.id}'">
+                                  <i class="fas fa-map-marker-alt"></i>
+                              </button>`;
+            }
+
+            // 3. Devolvemos el HTML completo del grupo de botones
             return `<div class="btn-group"> 
-                        <button type="button" title="Ver en mapa" class="btn bg-olive" onclick="window.location.href='../map-pluviometer-page/${row.id}'" >
-                          <i class="fas fa-map-marker-alt"></i>
-                        </button>
-                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-pluviometer" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
-                          <i class="fas fa-edit"></i>
-                        </button>  
-                        <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
-                          <i class="fas fa-trash"></i>
-                        </button>                                          
+                        ${mapButtonHtml}
+                      <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-pluviometer" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}" >
+                      <i class="fas fa-edit"></i>
+                      </button>
+                      <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
+                      <i class="fas fa-trash"></i>
+                      </button>                                        
                       </div>`;
           },
         },
@@ -127,7 +143,7 @@ $("#modal-create-pluviometer").on("show.bs.modal", function (event) {
 
     // Realizar la petición con Axios
     axios
-      .get(`${url}` + selected_id + "/")
+      .get(`${url}${selected_id}/`)
       .then(function (response) {
         // Recibir la respuesta
         const selected_pluviometer = response.data;
