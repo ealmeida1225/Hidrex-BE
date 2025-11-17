@@ -10,6 +10,9 @@ def area_type(request):
 def map(request):
     return render(request, "map/map.html")
 
+def map_pluviometer(request, pluviometer_id=None):
+    return render(request, "map/map_pluviometer.html", {"pluviometer_id": pluviometer_id})
+
 
 def pluviometer_type(request):
     return render(request, "pluviometer_type/pluviometer_type.html")

@@ -108,6 +108,7 @@ urlpatterns = [
     # path("layers/", list_layers, name="list_layers"),
     path("area-type-page/", pages.area_type, name="area-type-page"),
     path("map-page/", pages.map, name="map-page"),
+    path("map-pluviometer-page/<int:pluviometer_id>/", pages.map_pluviometer, name="map-pluviometer-page"),
     path("pluviometer-type-page/", pages.pluviometer_type, name="pluviometer-type-page"),
     path("areas-page/", pages.areas, name="areas-page"),
     path(

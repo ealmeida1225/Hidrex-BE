@@ -84,7 +84,10 @@ $(document).ready(function () {
           data: "",
           title: "Acciones",
           render: (data, type, row) => {
-            return `<div class="btn-group">
+            return `<div class="btn-group"> 
+                        <button type="button" title="Ver en mapa" class="btn bg-olive" onclick="window.location.href='../map-pluviometer-page/${row.id}'" >
+                          <i class="fas fa-map-marker-alt"></i>
+                        </button>
                         <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-pluviometer" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
                           <i class="fas fa-edit"></i>
                         </button>  
