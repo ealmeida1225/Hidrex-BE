@@ -2,9 +2,12 @@ from rest_framework import serializers
 
 import logging
 
+from apps.business_app.models.area import Area
+from apps.business_app.models.area_node import AreaNode
 from apps.business_app.models.pluviometer import Pluviometer
 
 logger = logging.getLogger(__name__)
+from django.db.models import Exists, OuterRef
 
 
 class PluviometerSerializer(serializers.ModelSerializer):
@@ -30,15 +33,18 @@ class PluviometerSerializer(serializers.ModelSerializer):
 
     def get_locations(self, obj):
         try:
-            locations = obj.pluviometer_area.select_related("area")
+            areas = Area.objects.filter(
+                Exists(AreaNode.objects.filter(area=OuterRef("pk"))),
+                pluviometer_area__pluviometer=obj,
+            ).select_related("area_type")
             return [
                 {
-                    "name": location.area.name,
-                    "area_type": location.area.area_type.name
-                    if location.area.area_type
+                    "name": location.name,
+                    "area_type": location.area_type.name
+                    if location.area_type
                     else None,
                 }
-                for location in locations
+                for location in areas
             ]
         except Exception as e:
             logger.error(f"Error retrieving locations for Pluviometer {obj.id}: {e}")
