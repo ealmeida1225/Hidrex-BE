@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class AreaSerializer(serializers.ModelSerializer):
     area_type_name = serializers.SerializerMethodField()
-    nodes=AreaNodeSerializer(many=True, read_only=True)
+    nodes = AreaNodeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Area

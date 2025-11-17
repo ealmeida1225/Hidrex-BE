@@ -16,7 +16,9 @@ class PluviometerAreaViewSet(viewsets.ModelViewSet, GenericAPIView):
     API endpoint that allows file upload extensions added or edited.
     """
 
-    queryset = PluviometerArea.objects.all().select_related("pluviometer", "area","area__area_type")
+    queryset = PluviometerArea.objects.all().select_related(
+        "pluviometer", "area", "area__area_type"
+    )
     serializer_class = PluviometerAreaSerializer
     ordering_fields = "__all__"
     filter_backends = [
@@ -24,6 +26,10 @@ class PluviometerAreaViewSet(viewsets.ModelViewSet, GenericAPIView):
         filters.SearchFilter,
         CommonOrderingFilter,
     ]
-    filterset_fields=["pluviometer", "area","area__area_type",]
+    filterset_fields = [
+        "pluviometer",
+        "area",
+        "area__area_type",
+    ]
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

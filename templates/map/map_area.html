@@ -1,0 +1,110 @@
+{% extends "index.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head-extra %}
+<link rel="stylesheet" href="{% static 'assets/dist/css/leaflet.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="map_id" style="height: 100vh; width: 100%;"></div>
+
+{% endblock %}
+{% block script %} <!-- DataTables & Plugins -->
+<script src="{% static 'assets/dist/js/axios.min.js' %}"></script>
+<script src="{% static 'assets/dist/js/leaflet.js' %}"></script>
+
+<!-- Page specific script -->
+    <script>
+
+    var mymap = L.map('map_id');
+
+    const area_url = `/business-gestion/area/{{area_id}}`;
+    axios
+        .get(`${area_url}`, {
+        params: {},
+        })
+        .then((res) => {
+            let area = res.data
+            mymap.setView(
+           [ area.centroid_lat, area.centroid_lon], 11);
+             var tileUrl = "{% static 'assets/tiles/' %}";
+                L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
+                // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
+                
+                nodes = area.nodes
+                var latlngs = []
+                for (let node_pos = 0; node_pos < nodes.length; node_pos++) {
+                    latlngs.push([nodes[node_pos].lat, nodes[node_pos].lon]);
+                };
+                L.polygon(latlngs, {color: 'red'}, ).addTo(mymap).on("mouseover", (e) => {
+                let poligon = e.target;
+                poligon.bindPopup(`<b>Municipio</b>: ${area.name} <br>
+                                <b>Subdivisión</b>: ${area.sub_name} (${area.area_type_name})<br>
+                                `);
+                poligon.openPopup();
+                })
+                .on("mouseout", (e) => {
+                e.target.closePopup();
+                });
+            })
+        .catch((error) => {
+        alert(error);
+        });
+
+
+/*
+
+            L.marker([area.lat, area.lon])
+                .addTo(mymap)
+                .on("mouseover", (e) => {
+                let marker = e.target;
+                marker.bindPopup(`<b>Pluviómetro</b>: ${area.name} (${area.station_name})<br>
+                                <b>Altura sobre el mar</b>: ${area.msnm} metros<br>
+                                <b>Latitud</b>: ${area.lat}<br>
+                                <b>Longitud</b>: ${area.lon}<br>
+                                `);
+                marker.openPopup();
+                })
+                .on("mouseout", (e) => {
+                e.target.closePopup();
+                });
+
+
+*/
+
+
+    const pluviometer_area_url = `/business-gestion/pluviometer/?pluviometer_area__area={{area_id}}&`;
+    axios
+        .get(`${pluviometer_area_url}`, {
+        params: {},
+        })
+        .then((res) => {
+            let result_info = res.data.results
+            for (let pos = 0; pos < result_info.length; pos++) {
+                let pluviometer_info = result_info[pos];
+                if (pluviometer_info.lat != null && pluviometer_info.lon != null){ 
+                    L.marker([pluviometer_info.lat, pluviometer_info.lon])
+                    .addTo(mymap)
+                    .on("mouseover", (e) => {
+                    let marker = e.target;
+                    marker.bindPopup(`<b>Pluviómetro</b>: ${pluviometer_info.name} (${pluviometer_info.station_name})<br>
+                                    <b>Altura sobre el mar</b>: ${pluviometer_info.msnm} metros<br>
+                                    <b>Latitud</b>: ${pluviometer_info.lat}<br>
+                                    <b>Longitud</b>: ${pluviometer_info.lon}<br>
+                                    `);
+                    marker.openPopup();
+                    })
+                    .on("mouseout", (e) => {
+                    e.target.closePopup();
+                    });
+                }
+            };
+
+        })
+        .catch((error) => {
+        alert(error);
+        });
+	</script>
+
+{% endblock %}

@@ -34,7 +34,7 @@
         pluv_data = res.data.results;
         for (let pos = 0; pos < pluv_data.length; pos++) {
             let pluv = pluv_data[pos];
-            if (pluv.lat != null) {
+            if (pluv.lat != null && pluv.lon != null){ 
             L.marker([pluv.lat, pluv.lon])
                 .addTo(mymap)
                 .on("mouseover", (e) => {

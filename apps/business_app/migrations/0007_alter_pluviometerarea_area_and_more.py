@@ -5,20 +5,27 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('business_app', '0006_creating_hidrogeological_area_types'),
+        ("business_app", "0006_creating_hidrogeological_area_types"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='pluviometerarea',
-            name='area',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='pluviometer_area', to='business_app.area'),
+            model_name="pluviometerarea",
+            name="area",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="pluviometer_area",
+                to="business_app.area",
+            ),
         ),
         migrations.AlterField(
-            model_name='pluviometerarea',
-            name='pluviometer',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='pluviometer_area', to='business_app.pluviometer'),
+            model_name="pluviometerarea",
+            name="pluviometer",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="pluviometer_area",
+                to="business_app.pluviometer",
+            ),
         ),
     ]

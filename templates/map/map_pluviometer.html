@@ -31,7 +31,6 @@
              var tileUrl = "{% static 'assets/tiles/' %}";
                 L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
                 // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
-            console.log('El objeto mapa es:', mymap); 
 
             L.marker([pluv.lat, pluv.lon])
                 .addTo(mymap)
@@ -41,6 +40,7 @@
                                 <b>Altura sobre el mar</b>: ${pluv.msnm} metros<br>
                                 <b>Latitud</b>: ${pluv.lat}<br>
                                 <b>Longitud</b>: ${pluv.lon}<br>
+                                <b>Pertenece a</b>: ${pluv.locations[1].area_type} ${pluv.locations[1].name}<br>
                                 `);
                 marker.openPopup();
                 })
@@ -53,37 +53,35 @@
         });
 
 
-    const pluviometer_area_url = `/business-gestion/area/?pluviometer_area__pluviometer={{pluviometer_id}}&`;
-    axios
-        .get(`${pluviometer_area_url}`, {
-        params: {},
-        })
-        .then((res) => {
-            hidrological_info = res.data.results
-            for (let pos = 0; pos < hidrological_info.length; pos++) {
-                let poligon_info = hidrological_info[pos];
-                nodes = poligon_info.nodes
-                var latlngs = []
-                for (let node_pos = 0; node_pos < nodes.length; node_pos++) {
-                    latlngs.push([nodes[node_pos].lat, nodes[node_pos].lon]);
-                };
-                L.polygon(latlngs, {color: 'red'}, ).addTo(mymap).on("mouseover", (e) => {
-                let poligon = e.target;
-                poligon.bindPopup(`<b>Municipio</b>: ${poligon_info.name} <br>
-                                <b>Subdivisión</b>: ${poligon_info.sub_name} (${poligon_info.area_type_name})<br>
-                                `);
-                poligon.openPopup();
-                })
-                .on("mouseout", (e) => {
-                e.target.closePopup();
-                });;
-            };
-
-            
-            })
-        .catch((error) => {
-        alert(error);
-        });
+    // const pluviometer_area_url = `/business-gestion/area/?pluviometer_area__pluviometer={{pluviometer_id}}&`;
+    // axios
+    //     .get(`${pluviometer_area_url}`, {
+    //     params: {},
+    //     })
+    //     .then((res) => {
+    //         hidrological_info = res.data.results
+    //         for (let pos = 0; pos < hidrological_info.length; pos++) {
+    //             let poligon_info = hidrological_info[pos];
+    //             nodes = poligon_info.nodes
+    //             var latlngs = []
+    //             for (let node_pos = 0; node_pos < nodes.length; node_pos++) {
+    //                 latlngs.push([nodes[node_pos].lat, nodes[node_pos].lon]);
+    //             };
+    //             L.polygon(latlngs, {color: 'red'}, ).addTo(mymap).on("mouseover", (e) => {
+    //             let poligon = e.target;
+    //             poligon.bindPopup(`<b>Municipio</b>: ${poligon_info.name} <br>
+    //                             <b>Subdivisión</b>: ${poligon_info.sub_name} (${poligon_info.area_type_name})<br>
+    //                             `);
+    //             poligon.openPopup();
+    //             })
+    //             .on("mouseout", (e) => {
+    //             e.target.closePopup();
+    //             });;
+    //         };
+    //         })
+    //     .catch((error) => {
+    //     alert(error);
+    //     });
 	</script>
 
 {% endblock %}

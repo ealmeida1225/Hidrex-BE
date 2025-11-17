@@ -16,7 +16,11 @@ class AreaViewSet(viewsets.ModelViewSet, GenericAPIView):
     API endpoint that allows file upload extensions added or edited.
     """
 
-    queryset = Area.objects.all().select_related("area_type").prefetch_related("nodes", "pluviometer_area")
+    queryset = (
+        Area.objects.all()
+        .select_related("area_type")
+        .prefetch_related("nodes", "pluviometer_area")
+    )
     serializer_class = AreaSerializer
     ordering_fields = "__all__"
     filter_backends = [
@@ -24,6 +28,6 @@ class AreaViewSet(viewsets.ModelViewSet, GenericAPIView):
         filters.SearchFilter,
         CommonOrderingFilter,
     ]
-    filterset_fields=["pluviometer_area__pluviometer"]
+    filterset_fields = ["pluviometer_area__pluviometer"]
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

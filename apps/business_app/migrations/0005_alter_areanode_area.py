@@ -5,15 +5,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('business_app', '0004_alter_area_area_type'),
+        ("business_app", "0004_alter_area_area_type"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='areanode',
-            name='area',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='nodes', to='business_app.area'),
+            model_name="areanode",
+            name="area",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="nodes",
+                to="business_app.area",
+            ),
         ),
     ]

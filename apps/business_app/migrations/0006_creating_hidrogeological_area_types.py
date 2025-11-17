@@ -2,21 +2,29 @@
 
 from django.db import migrations
 
+
 def convert_area_types(apps, schema_editor):
     AreaType = apps.get_model("business_app", "AreaType")
     municipio = AreaType.objects.get(name__iexact="Municipios")
     hidrological_sector = AreaType.objects.get(name__iexact="Sector Hidrogeológico")
     Area = apps.get_model("business_app", "Area")
-    Area.objects.filter(area_type = municipio).exclude(sub_name__exact="").update(area_type=hidrological_sector)
-    
+    Area.objects.filter(area_type=municipio).exclude(sub_name__exact="").update(
+        area_type=hidrological_sector
+    )
+
+    municipio.name = "Municipio"
+    municipio.save()
+    hidrological_sector.name = "Sector Hidrogeológico"
+    hidrological_sector.save()
+    AreaType.objects.filter(name__iexact="Cuencas").update(name="Cuenca Hidrográfica")
+    AreaType.objects.filter(name__iexact="Provincias").update(name="Provincia")
+
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('business_app', '0005_alter_areanode_area'),
+        ("business_app", "0005_alter_areanode_area"),
     ]
 
     operations = [
         migrations.RunPython(convert_area_types, migrations.RunPython.noop),
-
     ]

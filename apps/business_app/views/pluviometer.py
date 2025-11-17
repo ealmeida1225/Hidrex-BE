@@ -24,5 +24,8 @@ class PluviometerViewSet(viewsets.ModelViewSet, GenericAPIView):
         filters.SearchFilter,
         CommonOrderingFilter,
     ]
+    filterset_fields = [
+        "pluviometer_area__area",
+    ]
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

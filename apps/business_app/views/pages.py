@@ -3,15 +3,22 @@ from django.shortcuts import render
 # Create your views here.
 
 
-
 def area_type(request):
     return render(request, "area_type/area_type.html")
+
 
 def map(request):
     return render(request, "map/map.html")
 
+
 def map_pluviometer(request, pluviometer_id=None):
-    return render(request, "map/map_pluviometer.html", {"pluviometer_id": pluviometer_id})
+    return render(
+        request, "map/map_pluviometer.html", {"pluviometer_id": pluviometer_id}
+    )
+
+
+def map_area(request, area_id=None):
+    return render(request, "map/map_area.html", {"area_id": area_id})
 
 
 def pluviometer_type(request):
