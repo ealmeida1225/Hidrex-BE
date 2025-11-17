@@ -5,6 +5,7 @@ const csrfToken = document.cookie
   ?.split("=")[1];
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
+// const url = "/business-gestion/pluviometer/";
 const url = "/business-gestion/pluviometer/";
 
 $(function () {
@@ -262,7 +263,8 @@ form.addEventListener("submit", function (event) {
 
 function poblarListas() {
   var $pluviometer_types = document.getElementById("pluviometer_type");
-  axios.get("../../business-gestion/pluviometer-type/").then(function (response) {
+
+  axios.get("/business-gestion/pluviometer-type/").then(function (response) {
     response.data.results.forEach(function (element) {
       var option = new Option(element.name, element.id);
       $pluviometer_types.add(option);

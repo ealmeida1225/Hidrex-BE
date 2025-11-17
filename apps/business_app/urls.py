@@ -1,6 +1,8 @@
 # from rest_framework import routers
+from django.urls import path
 from rest_framework_extensions.routers import ExtendedSimpleRouter
 
+from apps.business_app.views import pages
 from apps.business_app.views.area import AreaViewSet
 from apps.business_app.views.area_node import AreaNodeViewSet
 from apps.business_app.views.area_type import AreaTypeViewSet
@@ -104,6 +106,41 @@ router.register(
 
 urlpatterns = [
     # path("layers/", list_layers, name="list_layers"),
+    path("area-type-page/", pages.area_type, name="area-type-page"),
+    path("map-page/", pages.map, name="map-page"),
+    path("pluviometer-type-page/", pages.pluviometer_type, name="pluviometer-type-page"),
+    path("areas-page/", pages.areas, name="areas-page"),
+    path(
+        "precipitation-concentration-index-by-area-page/",
+        pages.precipitation_concentration_index_by_area,
+        name="precipitation-concentration-index-by-area-page",
+    ),
+    path(
+        "precipitation-concentration-index-by-pluviometer-page/",
+        pages.precipitation_concentration_index_by_pluviometer,
+        name="precipitation-concentration-index-by-pluviometer-page",
+    ),
+    path(
+        "precipitation-concentration-index-monthly-by-area-page/",
+        pages.precipitation_concentration_index_monthly_by_area,
+        name="precipitation-concentration-index-monthly-by-area-page",
+    ),
+    path(
+        "precipitation-concentration-index-monthly-by-pluviometer-page/",
+        pages.precipitation_concentration_index_monthly_by_pluviometer,
+        name="precipitation-concentration-index-monthly-by-pluviometer-page",
+    ),
+    path("area-node-page/", pages.area_node, name="area-node-page"),
+    path("pluviometer-page/", pages.pluviometer, name="pluviometer-page"),
+    path("pluviometer-area-page/", pages.pluviometer_area, name="pluviometer-area-page"),
+    path("registers-page/", pages.registers, name="registers-page"),
+    path("year-statistics-page/", pages.year_statistics, name="year-statistics-page"),
+    path("month-statistics-page/", pages.month_statistics, name="month-statistics-page"),
+    path(
+        "diary-precipitation-classification-page/",
+        pages.diary_precipitation_classification,
+        name="diary-precipitation-classification-page",
+    ),
 ]
 
 urlpatterns += router.urls

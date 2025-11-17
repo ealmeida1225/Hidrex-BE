@@ -182,7 +182,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
               <ul class="nav nav-treeview ">
                 <li class="nav-item">
-                  <a href="{% url 'map' %}" class="nav-link">
+                  <a href="{% url 'map-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Mapa{% endblocktranslate %}</p>
                   </a>
@@ -194,103 +194,91 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'pluviometer_type' %}" class="nav-link">
+                  <a href="{% url 'pluviometer-type-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Tipos de Pluviómetro{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'pluviometer' %}" class="nav-link">
+                  <a href="{% url 'pluviometer-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Pluviómetros{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'pluviometer_area' %}" class="nav-link">
+                  <a href="{% url 'pluviometer-area-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Pluviómetros por área{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'area_type' %}" class="nav-link">
+                  <a href="{% url 'area-type-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Tipos de Área{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'areas' %}" class="nav-link">
+                  <a href="{% url 'areas-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Áreas{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'precipitation_concentration_index_by_area' %}" class="nav-link">
+                  <a href="{% url 'precipitation-concentration-index-by-area-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Índice de concentración de precipitaciones por área{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'precipitation_concentration_index_monthly_by_area' %}" class="nav-link">
+                  <a href="{% url 'precipitation-concentration-index-monthly-by-area-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Índice de concentración de precipitaciones mensuales por área{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'precipitation_concentration_index_by_pluviometer' %}" class="nav-link">
+                  <a href="{% url 'precipitation-concentration-index-by-pluviometer-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Índice de concentración de precipitaciones por pluviómetro{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'precipitation_concentration_index_monthly_by_pluviometer' %}" class="nav-link">
+                  <a href="{% url 'precipitation-concentration-index-monthly-by-pluviometer-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Índice de concentración de precipitaciones mensuales por pluviómetro{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'area_node' %}" class="nav-link">
+                  <a href="{% url 'area-node-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Nodos de áreas{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'shops' %}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>{% blocktranslate %}Tiendas{% endblocktranslate %}</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{% url 'diary_precipitation_classification' %}" class="nav-link">
+                  <a href="{% url 'diary-precipitation-classification-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Clasificación de precipitaciones diarias{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'month_statistics' %}" class="nav-link">
+                  <a href="{% url 'month-statistics-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Estadísticas Mensuales{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'products' %}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>{% blocktranslate %}Producto{% endblocktranslate %}</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{% url 'registers' %}" class="nav-link">
+                  <a href="{% url 'registers-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Registros diarios{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'month_statistics' %}" class="nav-link">
+                  <a href="{% url 'month-statistics-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Estadísticas mensuales{% endblocktranslate %}</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'year_statistics' %}" class="nav-link">
+                  <a href="{% url 'year-statistics-page' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{% blocktranslate %}Estadísticas anuales{% endblocktranslate %}</p>
                   </a>
