@@ -35,28 +35,6 @@
         alert(error);
         });
 
-
-/*
-
-            L.marker([area.lat, area.lon])
-                .addTo(mymap)
-                .on("mouseover", (e) => {
-                let marker = e.target;
-                marker.bindPopup(`<b>Pluviómetro</b>: ${area.name} (${area.station_name})<br>
-                                <b>Altura sobre el mar</b>: ${area.msnm} metros<br>
-                                <b>Latitud</b>: ${area.lat}<br>
-                                <b>Longitud</b>: ${area.lon}<br>
-                                `);
-                marker.openPopup();
-                })
-                .on("mouseout", (e) => {
-                e.target.closePopup();
-                });
-
-
-*/
-
-
     const pluviometer_area_url = `/business-gestion/pluviometer/?pluviometer_area__area={{area_id}}&`;
     axios
         .get(`${pluviometer_area_url}`, {

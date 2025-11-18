@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from project_site import settings
+
 # Create your views here.
 
 
@@ -8,17 +10,21 @@ def area_type(request):
 
 
 def map(request):
-    return render(request, "map/map.html")
+    return render(request, "map/map.html", {"debug_mode": settings.DEBUG})
 
 
 def map_pluviometer(request, pluviometer_id=None):
     return render(
-        request, "map/map_pluviometer.html", {"pluviometer_id": pluviometer_id}
+        request,
+        "map/map_pluviometer.html",
+        {"pluviometer_id": pluviometer_id, "debug_mode": settings.DEBUG},
     )
 
 
 def map_area(request, area_id=None):
-    return render(request, "map/map_area.html", {"area_id": area_id})
+    return render(
+        request, "map/map_area.html", {"area_id": area_id, "debug_mode": settings.DEBUG}
+    )
 
 
 def pluviometer_type(request):
