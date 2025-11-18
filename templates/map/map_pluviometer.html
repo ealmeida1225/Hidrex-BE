@@ -36,35 +36,47 @@
         });
 
 
-    // const pluviometer_area_url = `/business-gestion/area/?pluviometer_area__pluviometer={{pluviometer_id}}&`;
-    // axios
-    //     .get(`${pluviometer_area_url}`, {
-    //     params: {},
-    //     })
-    //     .then((res) => {
-    //         hidrological_info = res.data.results
-    //         for (let pos = 0; pos < hidrological_info.length; pos++) {
-    //             let poligon_info = hidrological_info[pos];
-    //             nodes = poligon_info.nodes
-    //             var latlngs = []
-    //             for (let node_pos = 0; node_pos < nodes.length; node_pos++) {
-    //                 latlngs.push([nodes[node_pos].lat, nodes[node_pos].lon]);
-    //             };
-    //             L.polygon(latlngs, {color: 'red'}, ).addTo(mymap).on("mouseover", (e) => {
-    //             let poligon = e.target;
-    //             poligon.bindPopup(`<b>Municipio</b>: ${poligon_info.name} <br>
-    //                             <b>Subdivisión</b>: ${poligon_info.sub_name} (${poligon_info.area_type_name})<br>
-    //                             `);
-    //             poligon.openPopup();
-    //             })
-    //             .on("mouseout", (e) => {
-    //             e.target.closePopup();
-    //             });;
-    //         };
-    //         })
-    //     .catch((error) => {
-    //     alert(error);
-    //     });
+    const pluviometer_area_url = `/business-gestion/area/?pluviometer_area__pluviometer={{pluviometer_id}}&`;
+    axios
+        .get(`${pluviometer_area_url}`, {
+        params: {},
+        })
+        .then((res) => {
+            hidrological_info = res.data.results
+            for (let pos = 0; pos < hidrological_info.length; pos++) {
+                let poligon_info = hidrological_info[pos];
+                nodes = poligon_info.nodes
+                var latlngs = []
+                for (let node_pos = 0; node_pos < nodes.length; node_pos++) {
+                    latlngs.push([nodes[node_pos].lat, nodes[node_pos].lon]);
+                };
+                if (latlngs.length==0)
+                    continue;
+                let my_poligon = L.polygon(latlngs, {color: 'red'}, );
+                var overlayMaps = {
+                    "Mostrar área contenedora": my_poligon
+                };
+                L.control.layers(null, overlayMaps).addTo(mymap);
+                my_poligon.on("mouseover", (e) => {
+                    let poligon = e.target;
+                    poligon.bindPopup(` <b>Municipio</b>: ${poligon_info.name} <br>
+                                        <b>Subdivisión</b>: ${poligon_info.sub_name} (${poligon_info.area_type_name})<br>
+                                    `);
+                    poligon.openPopup();
+                })
+                .on("mouseout", (e) => {
+                e.target.closePopup();
+                });
+                
+            };
+            })
+        .catch((error) => {
+        alert(error);
+        });
+    
+
+
+
 	</script>
 
 {% endblock %}

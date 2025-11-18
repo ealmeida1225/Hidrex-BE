@@ -15,7 +15,6 @@
 <script src="{% static 'assets/dist/js/leaflet.js' %}"></script>
 <script>
     var mymap = L.map('map_id');
-    console.log("debug_mode: {{debug_mode}}")
     if ('{{debug_mode}}' == 'True'){
         var tileUrl = "{% static 'assets/tiles/' %}";
         L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
@@ -23,6 +22,7 @@
     else{
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
     }
+    // L.control.scale().addTo(mymap);
 
 </script>
 

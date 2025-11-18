@@ -36,6 +36,8 @@
         });
 
     const pluviometer_area_url = `/business-gestion/pluviometer/?pluviometer_area__area={{area_id}}&`;
+    var pluviometers_on_area = []
+    var layer_group = L.layerGroup()
     axios
         .get(`${pluviometer_area_url}`, {
         params: {},
@@ -45,8 +47,7 @@
             for (let pos = 0; pos < result_info.length; pos++) {
                 let pluviometer_info = result_info[pos];
                 if (pluviometer_info.lat != null && pluviometer_info.lon != null){ 
-                    L.marker([pluviometer_info.lat, pluviometer_info.lon])
-                    .addTo(mymap)
+                    current_marker = L.marker([pluviometer_info.lat, pluviometer_info.lon])
                     .on("mouseover", (e) => {
                     let marker = e.target;
                     marker.bindPopup(`<b>Pluviómetro</b>: ${pluviometer_info.name} (${pluviometer_info.station_name})<br>
@@ -59,13 +60,22 @@
                     .on("mouseout", (e) => {
                     e.target.closePopup();
                     });
+                    pluviometers_on_area.push(current_marker)
                 }
             };
-
+        if (pluviometers_on_area.length > 0) {
+                var overlayMaps = {
+                    "Mostrar pluviómetros en el área": L.layerGroup(pluviometers_on_area)
+                };
+                L.control.layers(null, overlayMaps).addTo(mymap);
+            } else {
+                console.log("No se encontraron pluviómetros con coordenadas válidas en el área.");
+            }
         })
         .catch((error) => {
-        alert(error);
+            console.error("Error al obtener los pluviómetros:", error);
         });
+
 	</script>
 
 {% endblock %}
