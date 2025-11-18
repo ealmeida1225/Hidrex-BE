@@ -1,23 +1,11 @@
-{% extends "index.html" %}
+{% extends "map/map.html" %}
 {% load static %}
 {% load i18n %}
 
-{% block head-extra %}
-<link rel="stylesheet" href="{% static 'assets/dist/css/leaflet.css' %}">
-{% endblock %}
-
-{% block content %}
-<div id="map_id" style="height: 100vh; width: 100%;"></div>
-
-{% endblock %}
-{% block script %} <!-- DataTables & Plugins -->
-<script src="{% static 'assets/dist/js/axios.min.js' %}"></script>
-<script src="{% static 'assets/dist/js/leaflet.js' %}"></script>
+{% block script_logic %}
 
 <!-- Page specific script -->
     <script>
-
-    var mymap = L.map('map_id');
 
     const pluviometer_url = `/business-gestion/pluviometer/{{pluviometer_id}}`;
     axios
@@ -26,12 +14,7 @@
         })
         .then((res) => {
             pluv = res.data
-            mymap.setView(
-           [ pluv.lat, pluv.lon], 13);
-             var tileUrl = "{% static 'assets/tiles/' %}";
-                L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
-                // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
-
+            mymap.setView([pluv.lat, pluv.lon], 13);
             L.marker([pluv.lat, pluv.lon])
                 .addTo(mymap)
                 .on("mouseover", (e) => {

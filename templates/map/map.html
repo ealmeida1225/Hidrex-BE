@@ -10,19 +10,22 @@
 <div id="map_id" style="height: 100vh; width: 100%;"></div>
 
 {% endblock %}
-{% block script %} <!-- DataTables & Plugins -->
+{% block script %}
 <script src="{% static 'assets/dist/js/axios.min.js' %}"></script>
 <script src="{% static 'assets/dist/js/leaflet.js' %}"></script>
+<script>
+    var mymap = L.map('map_id');
+    var tileUrl = "{% static 'assets/tiles/' %}";
+    L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
 
+</script>
+
+{% block script_logic %}
 <!-- Page specific script -->
     <script>
-
-    let mymap = L.map('map_id').setView(
+    mymap.setView(
            [ 21.941415395551573,-78.66101966354675], 10);
-
-    var tileUrl = "{% static 'assets/tiles/' %}";
-    // L.tileLayer(tileUrl+'{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(mymap); //ESTA ES LOCAL
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap); //ESTA ES DESDE INTERNET
 
     const pluviometer_url = "/business-gestion/pluviometer/?page_size=1000";
     var pluv_data;
@@ -57,5 +60,7 @@
         });
 
 	</script>
+
+{% endblock %}
 
 {% endblock %}
