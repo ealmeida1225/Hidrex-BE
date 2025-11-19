@@ -11,6 +11,14 @@ logger = logging.getLogger(__name__)
 class AreaSerializer(serializers.ModelSerializer):
     area_type_name = serializers.SerializerMethodField()
     nodes = AreaNodeSerializer(many=True, read_only=True)
+    centroid_lon = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=3,
+    )
+    centroid_lat = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=3,
+    )
 
     class Meta:
         model = Area

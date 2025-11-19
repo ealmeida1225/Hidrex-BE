@@ -66,11 +66,13 @@ def precipitation_concentration_index_monthly_by_area(request):
     )
 
 
-def precipitation_concentration_index_monthly_by_pluviometer(request, pluviometer_id=None):
+def precipitation_concentration_index_monthly_by_pluviometer(
+    request, pluviometer_id=None
+):
     return render(
         request,
         "precipitation_concentration_index_monthly_by_pluviometer/precipitation_concentration_index_monthly_by_pluviometer.html",
-        {"pluviometer_id":pluviometer_id}
+        {"pluviometer_id": pluviometer_id},
     )
 
 
@@ -78,12 +80,20 @@ def area_node(request):
     return render(request, "area_node/area_node.html")
 
 
-def month_statistics(request,pluviometer_id=None):
-    return render(request, "month_statistics/month_statistics.html",{"pluviometer_id":pluviometer_id})
+def month_statistics(request, pluviometer_id=None):
+    return render(
+        request,
+        "month_statistics/month_statistics.html",
+        {"pluviometer_id": pluviometer_id},
+    )
 
 
 def year_statistics(request, pluviometer_id=None):
-    return render(request, "year_statistics/year_statistics.html",{"pluviometer_id":pluviometer_id})
+    return render(
+        request,
+        "year_statistics/year_statistics.html",
+        {"pluviometer_id": pluviometer_id},
+    )
 
 
 def pluviometer(request):

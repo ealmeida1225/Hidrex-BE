@@ -15,6 +15,14 @@ class PluviometerSerializer(serializers.ModelSerializer):
         source="pluviometer_type.__str__", read_only=True
     )
     locations = serializers.SerializerMethodField()
+    lon = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=3,
+    )
+    lat = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=3,
+    )
 
     class Meta:
         model = Pluviometer

@@ -149,9 +149,15 @@ urlpatterns = [
         "pluviometer-area-page/", pages.pluviometer_area, name="pluviometer-area-page"
     ),
     path("registers-page/", pages.registers, name="registers-page"),
-    path("year-statistics-page/<int:pluviometer_id>/", pages.year_statistics, name="year-statistics-page"),
     path(
-        "month-statistics-page/<int:pluviometer_id>/", pages.month_statistics, name="month-statistics-page"
+        "year-statistics-page/<int:pluviometer_id>/",
+        pages.year_statistics,
+        name="year-statistics-page",
+    ),
+    path(
+        "month-statistics-page/<int:pluviometer_id>/",
+        pages.month_statistics,
+        name="month-statistics-page",
     ),
     path(
         "diary-precipitation-classification-page/",

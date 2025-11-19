@@ -24,6 +24,6 @@ class MonthStatisticsViewSet(viewsets.ModelViewSet, GenericAPIView):
         filters.SearchFilter,
         CommonOrderingFilter,
     ]
-    filterset_fields=["year__pluviometer"]
+    filterset_fields = ["year__pluviometer"]
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
