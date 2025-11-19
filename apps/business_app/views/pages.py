@@ -42,6 +42,16 @@ def precipitation_concentration_index_by_area(request):
     )
 
 
+def precipitation_concentration_index_by_pluviometer_detail(
+    request, pluviometer_id=None
+):
+    return render(
+        request,
+        "precipitation_concentration_index_by_pluviometer/precipitation_concentration_index_by_pluviometer_detail.html",
+        {"pluviometer_id": pluviometer_id},
+    )
+
+
 def precipitation_concentration_index_by_pluviometer(request):
     return render(
         request,
@@ -56,10 +66,11 @@ def precipitation_concentration_index_monthly_by_area(request):
     )
 
 
-def precipitation_concentration_index_monthly_by_pluviometer(request):
+def precipitation_concentration_index_monthly_by_pluviometer(request, pluviometer_id=None):
     return render(
         request,
         "precipitation_concentration_index_monthly_by_pluviometer/precipitation_concentration_index_monthly_by_pluviometer.html",
+        {"pluviometer_id":pluviometer_id}
     )
 
 

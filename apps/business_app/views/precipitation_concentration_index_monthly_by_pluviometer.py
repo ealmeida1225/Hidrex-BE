@@ -32,5 +32,6 @@ class PrecipitationConcentrationIndexMonthlyByPluviometerViewSet(
         filters.SearchFilter,
         CommonOrderingFilter,
     ]
+    filterset_fields=["pluviometer"]
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

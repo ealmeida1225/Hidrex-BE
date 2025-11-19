@@ -104,11 +104,17 @@ $(document).ready(function () {
             // 3. Devolvemos el HTML completo del grupo de botones
             return `<div class="btn-group"> 
                         ${mapButtonHtml}
+                      <button type="button" title="Estadísticas generales" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-by-pluviometer-detail-page/${row.id}'">
+                          <i class="fas fa-sticky-note"></i>
+                      </button>
+                      <button type="button" title="Estadísticas mensuales" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-monthly-by-pluviometer-page/${row.id}'">
+                          <i class="fas fa-stamp"></i>
+                      </button>
                       <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-pluviometer" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}" >
-                      <i class="fas fa-edit"></i>
+                        <i class="fas fa-edit"></i>
                       </button>
                       <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
-                      <i class="fas fa-trash"></i>
+                        <i class="fas fa-trash"></i>
                       </button>                                        
                       </div>`;
           },

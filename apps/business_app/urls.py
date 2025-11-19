@@ -129,12 +129,17 @@ urlpatterns = [
         name="precipitation-concentration-index-by-pluviometer-page",
     ),
     path(
+        "precipitation-concentration-index-by-pluviometer-detail-page/<int:pluviometer_id>/",
+        pages.precipitation_concentration_index_by_pluviometer_detail,
+        name="precipitation-concentration-index-by-pluviometer-detail-page",
+    ),
+    path(
         "precipitation-concentration-index-monthly-by-area-page/",
         pages.precipitation_concentration_index_monthly_by_area,
         name="precipitation-concentration-index-monthly-by-area-page",
     ),
     path(
-        "precipitation-concentration-index-monthly-by-pluviometer-page/",
+        "precipitation-concentration-index-monthly-by-pluviometer-page/<int:pluviometer_id>/",
         pages.precipitation_concentration_index_monthly_by_pluviometer,
         name="precipitation-concentration-index-monthly-by-pluviometer-page",
     ),

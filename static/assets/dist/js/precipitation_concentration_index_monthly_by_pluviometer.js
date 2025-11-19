@@ -54,6 +54,7 @@ $(document).ready(function () {
         axios
           .get(`${url}`, {
             params: {
+              pluviometer: `${pluviometer_id}`,
               page_size: data.length,
               page: data.start / data.length + 1,
               search: data.search.value,
@@ -280,7 +281,7 @@ form.addEventListener("submit", function (event) {
 
 function poblarListas() {
   var $pluviometer = document.getElementById("pluviometer");
-  axios.get("../../business-gestion/pluviometer/").then(function (response) {
+  axios.get("../../pluviometer/").then(function (response) {
     response.data.results.forEach(function (element) {
       var option = new Option(element.__str__, element.id);
       $pluviometer.add(option);

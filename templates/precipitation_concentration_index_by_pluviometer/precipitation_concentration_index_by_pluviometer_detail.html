@@ -1,0 +1,152 @@
+{% extends "index.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head-extra %}
+<link rel="stylesheet" href="{% static 'assets/dist/css/adminlte.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/select2/css/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Estadística general del pluviómetro</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item active">Estadística general del pluviómetro</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <!-- /.card-header -->
+            <div class="modal-body">
+
+              <div class="card-title" id="precipitation-concentration-index-by-pluviometer-detail">
+                <div class="card-body">
+                  <div class="form-group">
+                      <label for="pluviometer">Pluviómetro</label>
+                      <input type="text"  disabled="true" class="form-control" rows="3"  id="pluviometer" name="pluviometer"></input>
+                  </div>
+              
+                  <div class="form-group">
+                    <label>Años considerados</label>
+                    <input type="text"  disabled="true" class="form-control" rows="3"  id="years_considered" name="years_considered"></input>
+                  </div>
+                  <div class="form-group">
+                    <label>Total de días considerados</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="total_rain_value" name="total_rain_value"></input>
+                  </div>       
+                  <div class="form-group">
+                    <label>Valor de a</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="a_value" name="a_value"></input>
+                  </div>           
+                  <div class="form-group">
+                    <label>Valor de b</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="b_value" name="b_value"></input>
+                  </div>            
+                  <div class="form-group">
+                    <label>Valor de r^2</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="r_2_value" name="r_2_value"></input>
+                  </div>        
+                  <div class="form-group">
+                    <label>Índice de concentración de precipitaciones</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="ci_value" name="ci_value"></input>
+                  </div>      
+                  <div class="form-group">
+                    <label>Total de días con lluvia</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="rainy_days" name="rainy_days"></input>
+                  </div>
+                    
+                  
+                  <div class="form-group">
+                    <label>Mayor lluvia registrada</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="max_rain_value" name="max_rain_value"></input>
+                  </div>   
+
+                  <div class="form-group">
+                    <label>Porciento de días lluviosos</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="rainy_days_percent" name="rainy_days_percent"></input>
+                  </div> 
+
+                  <div class="form-group">
+                    <label>Porciento de días lluviosos</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="rain_by_period_avg" name="rain_by_period_avg"></input>
+                  </div> 
+                  <div class="form-group">
+                    <label>Porciento de días lluviosos en el período</label>
+                    <input type="text"  disabled="true"  class="form-control" rows="3" id="rainy_days_by_period_avg" name="rainy_days_by_period_avg"></input>
+                  </div>
+                </div>
+              </div>
+              <!-- </div>style="overflow: hidden;"> -->
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- modal para crear modelo -->
+
+
+{% endblock %}
+{% block script %} <!-- DataTables & Plugins -->
+<script src="{% static 'assets/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'assets/plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'assets/plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bs-custom-file-label/bs-custom-file-label.min.js' %}"></script>
+<script src="{% static 'assets/plugins/jquery-validation/jquery.validate.min.js' %}"></script>
+<script src="{% static 'assets/plugins/jquery-validation/additional-methods.min.js' %}"></script>
+<script src="{% static 'assets/plugins/jquery-validation/localization/messages_es.js' %}"></script>
+<script src="{% static 'assets/dist/js/axios.min.js' %}"></script>
+<script>
+  var pluviometer_id = `{{pluviometer_id}}`
+</script>
+
+<script src="{% static 'assets/dist/js/precipitation_concentration_index_by_pluviometer_detail.js' %}"></script>
+<script src="{% static 'assets/plugins/select2/js/select2.full.min.js' %}"></script>
+
+<!-- Page specific script -->
+
+
+{% endblock %}
