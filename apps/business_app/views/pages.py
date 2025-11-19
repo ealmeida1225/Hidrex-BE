@@ -22,9 +22,7 @@ def map_pluviometer(request):
 
 
 def map_area(request):
-    return render(
-        request, "map/map_area.html", {"debug_mode": settings.DEBUG}
-    )
+    return render(request, "map/map_area.html", {"debug_mode": settings.DEBUG})
 
 
 def pluviometer_type(request):
@@ -42,9 +40,7 @@ def precipitation_concentration_index_by_area(request):
     )
 
 
-def precipitation_concentration_index_by_pluviometer_detail(
-    request
-):
+def precipitation_concentration_index_by_pluviometer_detail(request):
     return render(
         request,
         "precipitation_concentration_index_by_pluviometer/precipitation_concentration_index_by_pluviometer_detail.html",
@@ -71,7 +67,6 @@ def precipitation_concentration_index_monthly_by_pluviometer(
     return render(
         request,
         "precipitation_concentration_index_monthly_by_pluviometer/precipitation_concentration_index_monthly_by_pluviometer.html",
-
     )
 
 

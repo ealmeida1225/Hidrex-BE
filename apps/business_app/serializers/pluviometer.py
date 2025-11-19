@@ -1,3 +1,4 @@
+from django.db.models import Exists, OuterRef
 from rest_framework import serializers
 
 import logging
@@ -7,7 +8,6 @@ from apps.business_app.models.area_node import AreaNode
 from apps.business_app.models.pluviometer import Pluviometer
 
 logger = logging.getLogger(__name__)
-from django.db.models import Exists, OuterRef
 
 
 class PluviometerSerializer(serializers.ModelSerializer):
