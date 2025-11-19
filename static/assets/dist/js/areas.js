@@ -111,9 +111,9 @@ $(document).ready(function () {
                       <i class="fas fa-stamp"></i>
                     </button>
                     <button type="button" 
-                      title="Estadísticas mensuales" 
+                      title="CI con datos históricos" 
                       class="btn bg-olive" 
-                      onclick="navigateToURL('../precipitation-concentration-index-monthly-by-area-page', '${row.id}')">
+                      onclick="navigateToURL('../precipitation-concentration-index-by-area-page', '${row.id}')">
                       <i class="fas fa-chart-bar"></i> <!-- Cambié el icono para diferenciar -->
                     </button>
                     <button type="button" 

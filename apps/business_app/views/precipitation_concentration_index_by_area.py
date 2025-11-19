@@ -34,3 +34,4 @@ class PrecipitationConcentrationIndexByAreaViewSet(
     ]
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filterset_fields = ["area"]
