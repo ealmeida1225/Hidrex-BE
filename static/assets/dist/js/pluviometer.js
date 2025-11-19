@@ -104,10 +104,16 @@ $(document).ready(function () {
             // 3. Devolvemos el HTML completo del grupo de botones
             return `<div class="btn-group"> 
                         ${mapButtonHtml}
-                      <button type="button" title="Estadísticas generales" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-by-pluviometer-detail-page/${row.id}'">
+                      <button type="button" title="Estadísticas por mes" class="btn bg-olive" onclick="window.location.href='../month-statistics-page/${row.id}'">
+                          <i class="fas fa-star"></i>
+                      </button>                          
+                      <button type="button" title="Estadísticas por año" class="btn bg-olive" onclick="window.location.href='../year-statistics-page/${row.id}'">
+                          <i class="fas fa-star"></i>
+                      </button>                      
+                      <button type="button" title="CI con datos históricos" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-by-pluviometer-detail-page/${row.id}'">
                           <i class="fas fa-sticky-note"></i>
                       </button>
-                      <button type="button" title="Estadísticas mensuales" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-monthly-by-pluviometer-page/${row.id}'">
+                      <button type="button" title="CI con datos históricos por mes" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-monthly-by-pluviometer-page/${row.id}'">
                           <i class="fas fa-stamp"></i>
                       </button>
                       <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-pluviometer" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}" >

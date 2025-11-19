@@ -78,12 +78,12 @@ def area_node(request):
     return render(request, "area_node/area_node.html")
 
 
-def month_statistics(request):
-    return render(request, "month_statistics/month_statistics.html")
+def month_statistics(request,pluviometer_id=None):
+    return render(request, "month_statistics/month_statistics.html",{"pluviometer_id":pluviometer_id})
 
 
-def year_statistics(request):
-    return render(request, "year_statistics/year_statistics.html")
+def year_statistics(request, pluviometer_id=None):
+    return render(request, "year_statistics/year_statistics.html",{"pluviometer_id":pluviometer_id})
 
 
 def pluviometer(request):

@@ -11,6 +11,10 @@ class YearStatisticsSerializer(serializers.ModelSerializer):
     pluviometer_name = serializers.CharField(
         source="pluviometer.__str__", read_only=True
     )
+    total_precipit = serializers.DecimalField(max_digits=10, decimal_places=2)
+    max_registered_value = serializers.DecimalField(max_digits=10, decimal_places=2)
+    rainy_streak_med_long = serializers.DecimalField(max_digits=10, decimal_places=2)
+    daily_mean = serializers.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         model = YearStatistics

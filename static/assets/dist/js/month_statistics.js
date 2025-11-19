@@ -53,6 +53,7 @@ $(document).ready(function () {
         axios
           .get(`${url}`, {
             params: {
+              year__pluviometer: `${pluviometer_id}`,
               page_size: data.length,
               page: data.start / data.length + 1,
               search: data.search.value,
@@ -134,7 +135,7 @@ $("#modal-create-diary-precipitation-classification").on("show.bs.modal", functi
 
     // Realizar la petición con Axios
     axios
-      .get(`${url}` + selected_id + "/")
+      .get(`${url}${selected_id}/`)
       .then(function (response) {
         // Recibir la respuesta
         const element = response.data;

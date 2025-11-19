@@ -84,9 +84,15 @@ $(document).ready(function () {
           title: "Acciones",
           render: (data, type, row) => {
             return `<div class="btn-group">
-                        <button type="button" title="Ver en mapa" class="btn bg-olive" onclick="window.location.href='../map-area-page/${row.id}'">
-                          <i class="fas fa-map-marker-alt"></i>
-                        </button>
+                      <button type="button" title="CI con datos históricos" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-by-pluviometer-detail-page/${row.id}'">
+                          <i class="fas fa-sticky-note"></i>
+                      </button>
+                      <button type="button" title="CI con datos históricos por mes" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-monthly-by-pluviometer-page/${row.id}'">
+                          <i class="fas fa-stamp"></i>
+                      </button>
+                      <button type="button" title="Estadísticas mensuales" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-monthly-by-area-page/${row.id}'">
+                          <i class="fas fa-stamp"></i>
+                      </button>
                         <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-area" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
                           <i class="fas fa-edit"></i>
                         </button>  

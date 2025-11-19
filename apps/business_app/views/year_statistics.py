@@ -24,5 +24,5 @@ class YearStatisticsViewSet(viewsets.ModelViewSet, GenericAPIView):
         filters.SearchFilter,
         CommonOrderingFilter,
     ]
-
+    filterset_fields=["pluviometer"]
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

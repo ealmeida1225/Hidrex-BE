@@ -16,7 +16,7 @@ class MonthStatisticsViewSet(viewsets.ModelViewSet, GenericAPIView):
     API endpoint that allows file upload extensions added or edited.
     """
 
-    queryset = MonthStatistics.objects.all()
+    queryset = MonthStatistics.objects.all().select_related("year__pluviometer")
     serializer_class = MonthStatisticsSerializer
     ordering_fields = "__all__"
     filter_backends = [
@@ -24,5 +24,6 @@ class MonthStatisticsViewSet(viewsets.ModelViewSet, GenericAPIView):
         filters.SearchFilter,
         CommonOrderingFilter,
     ]
+    filterset_fields=["year__pluviometer"]
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

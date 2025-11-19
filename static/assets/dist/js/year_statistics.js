@@ -54,6 +54,7 @@ $(document).ready(function () {
         axios
           .get(`${url}`, {
             params: {
+              pluviometer: `${pluviometer_id}`,
               page_size: data.length,
               page: data.start / data.length + 1,
               search: data.search.value,
