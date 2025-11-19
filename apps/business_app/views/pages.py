@@ -21,9 +21,9 @@ def map_pluviometer(request, pluviometer_id=None):
     )
 
 
-def map_area(request, area_id=None):
+def map_area(request):
     return render(
-        request, "map/map_area.html", {"area_id": area_id, "debug_mode": settings.DEBUG}
+        request, "map/map_area.html", {"debug_mode": settings.DEBUG}
     )
 
 

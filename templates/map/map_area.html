@@ -6,7 +6,10 @@
 
 <!-- Page specific script -->
     <script>
-    const area_url = `/business-gestion/area/{{area_id}}`;
+    let area_id = localStorage.getItem('area_id');
+    console.log("Área ID:", area_id);
+
+    const area_url = `/business-gestion/area/${area_id}`;
     axios
         .get(`${area_url}`, {
         params: {},
@@ -34,13 +37,14 @@
         .catch((error) => {
         alert(error);
         });
-
-    const pluviometer_area_url = `/business-gestion/pluviometer/?pluviometer_area__area={{area_id}}&`;
+    const pluviometer_area_url = `/business-gestion/pluviometer/`;
     var pluviometers_on_area = []
     var layer_group = L.layerGroup()
     axios
         .get(`${pluviometer_area_url}`, {
-        params: {},
+        params: {
+            pluviometer_area__area: area_id,
+        },
         })
         .then((res) => {
             let result_info = res.data.results

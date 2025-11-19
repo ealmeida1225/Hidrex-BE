@@ -113,7 +113,7 @@ urlpatterns = [
         pages.map_pluviometer,
         name="map-pluviometer-page",
     ),
-    path("map-area-page/<int:area_id>/", pages.map_area, name="map-area-page"),
+    path("map-area-page/", pages.map_area, name="map-area-page"),
     path(
         "pluviometer-type-page/", pages.pluviometer_type, name="pluviometer-type-page"
     ),
