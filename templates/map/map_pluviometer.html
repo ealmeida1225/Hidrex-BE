@@ -6,10 +6,10 @@
 
 <!-- Page specific script -->
     <script>
-
-    const pluviometer_url = `/business-gestion/pluviometer/{{pluviometer_id}}`;
+    var pluviometer_id = localStorage.getItem("pluviometer_id");
+    const pluviometer_url = `/business-gestion/pluviometer/`;
     axios
-        .get(`${pluviometer_url}`, {
+        .get(`${pluviometer_url}${pluviometer_id}`, {
         params: {},
         })
         .then((res) => {
@@ -36,10 +36,12 @@
         });
 
 
-    const pluviometer_area_url = `/business-gestion/area/?pluviometer_area__pluviometer={{pluviometer_id}}&`;
+    const pluviometer_area_url = `/business-gestion/area/`;
     axios
         .get(`${pluviometer_area_url}`, {
-        params: {},
+        params: {
+            pluviometer_area__pluviometer: `${pluviometer_id}`,
+        },
         })
         .then((res) => {
             hidrological_info = res.data.results

@@ -11,7 +11,7 @@ $(function () {
   bsCustomFileInput.init();
   poblarListas();
 });
-
+var pluviometer_id = localStorage.getItem("pluviometer_id");
 $(document).ready(function () {
   $("table")
     .addClass("table table-hover")

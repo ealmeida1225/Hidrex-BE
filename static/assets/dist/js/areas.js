@@ -11,27 +11,13 @@ $(function () {
   bsCustomFileInput.init();
   poblarListas();
 });
-function navigateToArea(url, id) {
+function navigateToURL(url, id) {
     if (!url || !id) {
-        console.error("URL o ID no proporcionados a navigateToArea.");
+        console.error("URL o ID no proporcionados a navigateToURL.");
         return;
     }
     localStorage.setItem('area_id', id);
     window.location.href = url;
-}
-function function_delete(id, name) {
-    if (!id || !name) {
-        console.error("ID o nombre no proporcionados a function_delete.");
-        return;
-    }
-    
-    // Ejemplo de lógica de confirmación
-    const confirmacion = confirm(`¿Estás seguro de que quieres eliminar el área "${name}"?`);
-    if (confirmacion) {
-        // Aquí iría tu llamada AJAX o la redirección a la página de eliminación
-        console.log(`Eliminando área con ID: ${id}`);
-        // window.location.href = `/delete-area/${id}/`; // Ejemplo de redirección
-    }
 }
 $(document).ready(function () {
   $("table")
@@ -106,36 +92,43 @@ $(document).ready(function () {
           render: (data, type, row) => {
               return `
                   <div class="btn-group">
-                      <button type="button" title="Ver en mapa" class="btn bg-olive" 
-                              onclick="navigateToArea('../map-area-page/', '${row.id}')">
-                          <i class="fas fa-map-marker-alt"></i>
-                      </button>
-                      
-                      <button type="button" title="CI con datos históricos" class="btn bg-olive" 
-                              onclick="navigateToArea('../precip_detail_by_pluviometer', '${row.id}')">
-                          <i class="fas fa-sticky-note"></i>
-                      </button>
-                      
-                      <button type="button" title="CI con datos históricos por mes" class="btn bg-olive" 
-                              onclick="navigateToArea('../precip_monthly_by_pluviometer', '${row.id}')">
-                          <i class="fas fa-stamp"></i>
-                      </button>
-                      
-                      <button type="button" title="Estadísticas mensuales" class="btn bg-olive" 
-                              onclick="navigateToArea('../precip_monthly_by_area', '${row.id}')">
-                          <i class="fas fa-chart-bar"></i> <!-- Cambié el icono para diferenciar -->
-                      </button>
-                      
-                      <button type="button" title="Editar" class="btn bg-olive active" 
-                              data-toggle="modal" data-target="#modal-create-area" 
-                              data-id="${row.id}" data-type="edit" data-name="${row.name}">
-                          <i class="fas fa-edit"></i>
-                      </button>
-                      
-                      <button type="button" title="Eliminar" class="btn bg-olive" 
-                              onclick="function_delete('${row.id}', '${row.name}')">
-                          <i class="fas fa-trash"></i>
-                      </button>
+                    <button type="button" 
+                      title="Ver en mapa" 
+                      class="btn bg-olive"  
+                      onclick="navigateToURL('../map-area-page/', '${row.id}')">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </button>
+                    <button type="button" 
+                      title="CI con datos históricos" 
+                      class="btn bg-olive" 
+                      onclick="navigateToURL('../precipitation-concentration-index-by-area-detail-page', '${row.id}')">
+                      <i class="fas fa-sticky-note"></i>
+                    </button>
+                    <button type="button" 
+                      title="CI con datos históricos por mes" 
+                      class="btn bg-olive" 
+                      onclick="navigateToURL('../precipitation-concentration-index-monthly-by-area-page', '${row.id}')">
+                      <i class="fas fa-stamp"></i>
+                    </button>
+                    <button type="button" 
+                      title="Estadísticas mensuales" 
+                      class="btn bg-olive" 
+                      onclick="navigateToURL('../precipitation-concentration-index-monthly-by-area-page', '${row.id}')">
+                      <i class="fas fa-chart-bar"></i> <!-- Cambié el icono para diferenciar -->
+                    </button>
+                    <button type="button" 
+                      title="Editar" 
+                      class="btn bg-olive active" 
+                      data-toggle="modal" data-target="#modal-create-area" 
+                      data-id="${row.id}" data-type="edit" data-name="${row.name}">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button type="button" 
+                      title="Eliminar" 
+                      class="btn bg-olive" 
+                      onclick="function_delete('${row.id}', '${row.name}')">
+                      <i class="fas fa-trash"></i>
+                    </button>
                   </div>
               `;
           },

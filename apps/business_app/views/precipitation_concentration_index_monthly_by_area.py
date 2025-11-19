@@ -34,5 +34,8 @@ class PrecipitationConcentrationIndexMonthlyByAreaViewSet(
         filters.SearchFilter,
         CommonOrderingFilter,
     ]
+    filterset_fields = [
+        "area",
+    ]
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

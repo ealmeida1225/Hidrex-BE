@@ -5,13 +5,13 @@ const csrfToken = document.cookie
   ?.split("=")[1];
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
-const url = "/business-gestion/precipitation-concentration-index-monthly-by-area/";
+const url_to_call = "/business-gestion/precipitation-concentration-index-monthly-by-area/";
+const area_id = localStorage.getItem("area_id");
 
 $(function () {
   bsCustomFileInput.init();
   poblarListas();
 });
-
 $(document).ready(function () {
   $("table")
     .addClass("table table-hover")
@@ -52,8 +52,9 @@ $(document).ready(function () {
         }
 
         axios
-          .get(`${url}`, {
+          .get(`${url_to_call}`, {
             params: {
+              area: area_id,
               page_size: data.length,
               page: data.start / data.length + 1,
               search: data.search.value,
@@ -129,7 +130,7 @@ $("#modal-create-precipitation-concentration-index-monthly-by-area").on("show.bs
 
     // Realizar la petición con Axios
     axios
-      .get(`${url}` + selected_id + "/")
+      .get(`${url}${selected_id}/`)
       .then(function (response) {
         // Recibir la respuesta
         const selected_element = response.data;
