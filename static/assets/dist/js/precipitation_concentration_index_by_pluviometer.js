@@ -5,7 +5,7 @@ const csrfToken = document.cookie
   ?.split("=")[1];
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
-const url = `/business-gestion/precipitation-concentration-index-by-pluviometer/?pluviometer=${pluviometer_id}`;
+const url = `/business-gestion/precipitation-concentration-index-by-pluviometer/`;
 console.log(url)
 $(function () {
   bsCustomFileInput.init();
