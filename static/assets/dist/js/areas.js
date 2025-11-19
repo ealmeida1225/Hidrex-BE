@@ -84,6 +84,9 @@ $(document).ready(function () {
           title: "Acciones",
           render: (data, type, row) => {
             return `<div class="btn-group">
+                      <button type="button" title="Ver en mapa" class="btn bg-olive" onclick="window.location.href='../map-area-page/${row.id}'">
+                        <i class="fas fa-map-marker-alt"></i>
+                      </button>
                       <button type="button" title="CI con datos históricos" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-by-pluviometer-detail-page/${row.id}'">
                           <i class="fas fa-sticky-note"></i>
                       </button>
