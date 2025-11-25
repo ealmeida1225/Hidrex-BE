@@ -92,6 +92,10 @@ def pluviometer(request):
     return render(request, "pluviometer/pluviometer.html")
 
 
+def chart_pluviometer(request):
+    return render(request, "charts/chart_pluviometer.html")
+
+
 def pluviometer_area(request):
     return render(request, "pluviometer_area/pluviometer_area.html")
 

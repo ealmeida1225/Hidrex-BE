@@ -14,123 +14,11 @@
 
 {% block content %}
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Pluviómetros</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-            <li class="breadcrumb-item active">Pluviómetro</li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
-
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-
-
-
-          <div class="card">
-            <div class="card-header">
-
-              <h3 class="card-title">Gestionar Pluviómetro</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="modal-body">
-
-              <!-- </div>style="overflow: hidden;"> -->
-              <table id="tabla-de-Datos" class="table table-bordered table-striped" style="width: 100%;">
-
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-  </section>
-  <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-
-<!-- modal para crear modelo -->
-<div class="modal fade" id="modal-create-pluviometer" data-backdrop="static" tabindex="-1" role="dialog"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Adicionar Pluviómetro</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <form id="form-create-pluviometer">
-        <div class="card-body">
-
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <label for="name">Nombre</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Entre el nombre" required>
-            </div>
-            <div class="form-group col-sm-6">
-              <label for="area_type">Tipo</label>
-              <select class="form-control " id="pluviometer_type" name="pluviometer_type" tabindex="-1"></select>
-            </div>
-          </div>
-        
-          <div class="form-group">
-            <label>Nombre de la estación</label>
-            <input type="text" class="form-control" rows="3" id="station_name" name="station_name" placeholder="Enter subname"></input>
-          </div>        
-          <div class="form-group">
-            <label>Latitud</label>
-            <input type="number" class="form-control" rows="3" id="lat" name="lat" placeholder="Enter ..."></input>
-          </div>        
-          <div class="form-group">
-            <label>Longitud</label>
-            <input type="number" class="form-control" rows="3" id="lon" name="lon" placeholder="Enter ..."></input>
-          </div>        
-          <div class="form-group">
-            <label>Metros sobre nivel del mar</label>
-            <textarea class="form-control" rows="3" id="msnm" name="msnm" placeholder="Descripción"></textarea>
-          </div>
-        </div>
-
-        <!-- /.card-body -->
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </div>
-
-
-      </form>
-
-    </div>
+<div class="card-body">
+  <div class="chart" style="height: 100vh; width: 100%;">
+    <canvas id="pluviometerChart" style="width:100%; height:100%; display:block;"></canvas>
   </div>
-
 </div>
-
-<!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
 {% endblock %}
 {% block script %} <!-- DataTables & Plugins -->
@@ -151,6 +39,8 @@
 <script src="{% static 'assets/plugins/jquery-validation/additional-methods.min.js' %}"></script>
 <script src="{% static 'assets/plugins/jquery-validation/localization/messages_es.js' %}"></script>
 <script src="{% static 'assets/dist/js/axios.min.js' %}"></script>
+<script src="{% static 'assets/plugins/chart.js/Chart.min.js' %}"></script>
+
 
 <script src="{% static 'assets/dist/js/chart_pluviometer.js' %}"></script>
 <script src="{% static 'assets/plugins/select2/js/select2.full.min.js' %}"></script>

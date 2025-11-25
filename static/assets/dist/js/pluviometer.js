@@ -112,6 +112,11 @@ $(document).ready(function () {
             // 3. Devolvemos el HTML completo del grupo de botones
             return `<div class="btn-group"> 
                         ${mapButtonHtml}
+                      <button type="button" title="Ver graficamente" 
+                          class="btn bg-olive" 
+                          onclick="navigateToURL('../chart-pluviometer-page/', '${row.id}')">
+                          <i class="fas fa-star"></i>
+                      </button> 
                       <button type="button" title="Estadísticas por mes" 
                           class="btn bg-olive" 
                           onclick="navigateToURL('../month-statistics-page/', '${row.id}')">

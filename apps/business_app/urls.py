@@ -145,6 +145,7 @@ urlpatterns = [
     ),
     path("area-node-page/", pages.area_node, name="area-node-page"),
     path("pluviometer-page/", pages.pluviometer, name="pluviometer-page"),
+    path("chart-pluviometer-page/", pages.chart_pluviometer, name="chart-pluviometer-page"),
     path(
         "pluviometer-area-page/", pages.pluviometer_area, name="pluviometer-area-page"
     ),
