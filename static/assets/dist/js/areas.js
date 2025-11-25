@@ -11,7 +11,14 @@ $(function () {
   bsCustomFileInput.init();
   poblarListas();
 });
-
+function navigateToURL(url, id) {
+    if (!url || !id) {
+        console.error("URL o ID no proporcionados a navigateToURL.");
+        return;
+    }
+    localStorage.setItem('area_id', id);
+    window.location.href = url;
+}
 $(document).ready(function () {
   $("table")
     .addClass("table table-hover")
@@ -83,26 +90,47 @@ $(document).ready(function () {
           data: "",
           title: "Acciones",
           render: (data, type, row) => {
-            return `<div class="btn-group">
-                      <button type="button" title="Ver en mapa" class="btn bg-olive" onclick="window.location.href='../map-area-page/${row.id}'">
-                        <i class="fas fa-map-marker-alt"></i>
-                      </button>
-                      <button type="button" title="CI con datos históricos" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-by-pluviometer-detail-page/${row.id}'">
-                          <i class="fas fa-sticky-note"></i>
-                      </button>
-                      <button type="button" title="CI con datos históricos por mes" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-monthly-by-pluviometer-page/${row.id}'">
-                          <i class="fas fa-stamp"></i>
-                      </button>
-                      <button type="button" title="Estadísticas mensuales" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-monthly-by-area-page/${row.id}'">
-                          <i class="fas fa-stamp"></i>
-                      </button>
-                        <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-area" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}"  >
-                          <i class="fas fa-edit"></i>
-                        </button>  
-                        <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
-                          <i class="fas fa-trash"></i>
-                        </button>                                          
-                      </div>`;
+              return `
+                  <div class="btn-group">
+                    <button type="button" 
+                      title="Ver en mapa" 
+                      class="btn bg-olive"  
+                      onclick="navigateToURL('../map-area-page/', '${row.id}')">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </button>
+                    <button type="button" 
+                      title="CI con datos históricos" 
+                      class="btn bg-olive" 
+                      onclick="navigateToURL('../precipitation-concentration-index-by-area-detail-page', '${row.id}')">
+                      <i class="fas fa-sticky-note"></i>
+                    </button>
+                    <button type="button" 
+                      title="CI con datos históricos por mes" 
+                      class="btn bg-olive" 
+                      onclick="navigateToURL('../precipitation-concentration-index-monthly-by-area-page', '${row.id}')">
+                      <i class="fas fa-stamp"></i>
+                    </button>
+                    <button type="button" 
+                      title="CI con datos históricos" 
+                      class="btn bg-olive" 
+                      onclick="navigateToURL('../precipitation-concentration-index-by-area-page', '${row.id}')">
+                      <i class="fas fa-chart-bar"></i> <!-- Cambié el icono para diferenciar -->
+                    </button>
+                    <button type="button" 
+                      title="Editar" 
+                      class="btn bg-olive active" 
+                      data-toggle="modal" data-target="#modal-create-area" 
+                      data-id="${row.id}" data-type="edit" data-name="${row.name}">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button type="button" 
+                      title="Eliminar" 
+                      class="btn bg-olive" 
+                      onclick="function_delete('${row.id}', '${row.name}')">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+              `;
           },
         },
       ],

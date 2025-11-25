@@ -109,11 +109,11 @@ urlpatterns = [
     path("area-type-page/", pages.area_type, name="area-type-page"),
     path("map-page/", pages.map, name="map-page"),
     path(
-        "map-pluviometer-page/<int:pluviometer_id>/",
+        "map-pluviometer-page/",
         pages.map_pluviometer,
         name="map-pluviometer-page",
     ),
-    path("map-area-page/<int:area_id>/", pages.map_area, name="map-area-page"),
+    path("map-area-page/", pages.map_area, name="map-area-page"),
     path(
         "pluviometer-type-page/", pages.pluviometer_type, name="pluviometer-type-page"
     ),
@@ -129,7 +129,7 @@ urlpatterns = [
         name="precipitation-concentration-index-by-pluviometer-page",
     ),
     path(
-        "precipitation-concentration-index-by-pluviometer-detail-page/<int:pluviometer_id>/",
+        "precipitation-concentration-index-by-pluviometer-detail-page/",
         pages.precipitation_concentration_index_by_pluviometer_detail,
         name="precipitation-concentration-index-by-pluviometer-detail-page",
     ),
@@ -139,7 +139,7 @@ urlpatterns = [
         name="precipitation-concentration-index-monthly-by-area-page",
     ),
     path(
-        "precipitation-concentration-index-monthly-by-pluviometer-page/<int:pluviometer_id>/",
+        "precipitation-concentration-index-monthly-by-pluviometer-page/",
         pages.precipitation_concentration_index_monthly_by_pluviometer,
         name="precipitation-concentration-index-monthly-by-pluviometer-page",
     ),
@@ -150,12 +150,12 @@ urlpatterns = [
     ),
     path("registers-page/", pages.registers, name="registers-page"),
     path(
-        "year-statistics-page/<int:pluviometer_id>/",
+        "year-statistics-page/",
         pages.year_statistics,
         name="year-statistics-page",
     ),
     path(
-        "month-statistics-page/<int:pluviometer_id>/",
+        "month-statistics-page/",
         pages.month_statistics,
         name="month-statistics-page",
     ),

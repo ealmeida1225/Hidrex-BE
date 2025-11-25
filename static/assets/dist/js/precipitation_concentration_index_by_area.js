@@ -6,7 +6,7 @@ const csrfToken = document.cookie
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
 const url = "/business-gestion/precipitation-concentration-index-by-area/";
-
+const area_id = localStorage.getItem("area_id");
 $(function () {
   bsCustomFileInput.init();
   poblarListas();
@@ -54,6 +54,7 @@ $(document).ready(function () {
         axios
           .get(`${url}`, {
             params: {
+              area: area_id,
               page_size: data.length,
               page: data.start / data.length + 1,
               search: data.search.value,

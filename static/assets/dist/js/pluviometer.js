@@ -12,6 +12,14 @@ $(function () {
   bsCustomFileInput.init();
   poblarListas();
 });
+function navigateToURL(url, id) {
+    if (!url || !id) {
+        console.error("URL o ID no proporcionados a navigateToArea.");
+        return;
+    }
+    localStorage.setItem('pluviometer_id', id);
+    window.location.href = url;
+}
 
 $(document).ready(function () {
   $("table")
@@ -96,7 +104,7 @@ $(document).ready(function () {
                               </button>`;
             } else {
               // Si hay coordenadas, el botón se crea normalmente
-              mapButtonHtml = `<button type="button" title="Ver en mapa" class="btn bg-olive" onclick="window.location.href='../map-pluviometer-page/${row.id}'">
+              mapButtonHtml = `<button type="button" title="Ver en mapa" class="btn bg-olive" onclick="navigateToURL('../map-pluviometer-page/', '${row.id}')">
                                   <i class="fas fa-map-marker-alt"></i>
                               </button>`;
             }
@@ -104,25 +112,45 @@ $(document).ready(function () {
             // 3. Devolvemos el HTML completo del grupo de botones
             return `<div class="btn-group"> 
                         ${mapButtonHtml}
-                      <button type="button" title="Estadísticas por mes" class="btn bg-olive" onclick="window.location.href='../month-statistics-page/${row.id}'">
+                      <button type="button" title="Estadísticas por mes" 
+                          class="btn bg-olive" 
+                          onclick="navigateToURL('../month-statistics-page/', '${row.id}')">
                           <i class="fas fa-star"></i>
                       </button>                          
-                      <button type="button" title="Estadísticas por año" class="btn bg-olive" onclick="window.location.href='../year-statistics-page/${row.id}'">
-                          <i class="fas fa-star"></i>
+                      <button type="button" 
+                        title="Estadísticas por año" 
+                        class="btn bg-olive" 
+                        onclick="navigateToURL('../year-statistics-page/', '${row.id}')">
+                        <i class="fas fa-star"></i>
                       </button>                      
-                      <button type="button" title="CI con datos históricos" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-by-pluviometer-detail-page/${row.id}'">
-                          <i class="fas fa-sticky-note"></i>
+                      <button type="button" 
+                        title="CI con datos históricos" 
+                        class="btn bg-olive" 
+                        onclick="navigateToURL('../precipitation-concentration-index-by-pluviometer-detail-page/', '${row.id}')">
+                        <i class="fas fa-sticky-note"></i>
                       </button>
-                      <button type="button" title="CI con datos históricos por mes" class="btn bg-olive" onclick="window.location.href='../precipitation-concentration-index-monthly-by-pluviometer-page/${row.id}'">
-                          <i class="fas fa-stamp"></i>
+                      <button type="button" 
+                        title="CI con datos históricos por mes" 
+                        class="btn bg-olive" 
+                        onclick="navigateToURL('../precipitation-concentration-index-monthly-by-pluviometer-page/', '${row.id}')">
+                        <i class="fas fa-stamp"></i>
                       </button>
-                      <button type="button" title="edit" class="btn bg-olive active" data-toggle="modal" data-target="#modal-create-pluviometer" data-id="${row.id}" data-type="edit" data-name="${row.name}" id="${row.id}" >
+                      <button type="button" 
+                        title="edit" 
+                        class="btn bg-olive active" 
+                        data-toggle="modal" 
+                        data-target="#modal-create-pluviometer" 
+                        data-id="${row.id}" 
+                        data-type="edit" data-name="${row.name}" id="${row.id}" >
                         <i class="fas fa-edit"></i>
                       </button>
-                      <button type="button" title="delete" class="btn bg-olive" onclick="function_delete('${row.id}','${row.name}')" >
+                      <button type="button" 
+                        title="delete" 
+                        class="btn bg-olive" 
+                        onclick="function_delete('${row.id}','${row.name}')" >
                         <i class="fas fa-trash"></i>
                       </button>                                        
-                      </div>`;
+                    </div>`;
           },
         },
       ],

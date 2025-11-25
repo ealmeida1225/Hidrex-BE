@@ -14,7 +14,7 @@ $(function () {
 
 
 let form = document.getElementById("precipitation-concentration-index-by-pluviometer-detail");
-
+let pluviometer_id = localStorage.getItem("pluviometer_id");
 // Realizar la petición con Axios
 axios
   .get(`${url}${pluviometer_id}/`)

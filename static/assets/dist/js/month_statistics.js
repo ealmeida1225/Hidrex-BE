@@ -6,7 +6,7 @@ const csrfToken = document.cookie
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
 const url = "/business-gestion/month-statistics/";
-
+const pluviometer_id = localStorage.getItem("pluviometer_id");
 $(function () {
   bsCustomFileInput.init();
   poblarListas()
