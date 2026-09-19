@@ -2,6 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, permissions, viewsets
 from rest_framework.generics import GenericAPIView
 
+from rest_framework.decorators import action
 
 from apps.business_app.models.registers import Registers
 from apps.business_app.serializers.registers import RegistersSerializer
@@ -26,3 +27,14 @@ class RegistersViewSet(viewsets.ModelViewSet, GenericAPIView):
     ]
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+    # @action(
+    #     detail=False,
+    #     methods=["GET"],
+    #     url_path="get-graph-info",
+    #     url_name="get-graph-info",
+    #     serializer_class=GeneGetAllInfoSerializer,
+    # )
+    # def get_graph_info(self, request):
+    #     return self.list(request)

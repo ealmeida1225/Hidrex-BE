@@ -7,10 +7,28 @@ axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 // url del endpoint principal
 // const url = "/business-gestion/pluviometer/";
 const url = "/business-gestion/pluviometer/";
+function getDayOfWeek(date) {
+    // Crear un objeto Date si la entrada es una cadena
+    const dateObj = typeof date === 'string' ? new Date(date) : date;
+
+    // Asegurarse de que la fecha es válida
+    if (isNaN(dateObj)) {
+        throw new Error('Fecha inválida');
+    }
+
+    // Array con los nombres de los días de la semana
+    const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
+    // Obtener el índice del día de la semana (0-6)
+    const dayIndex = (dateObj.getUTCDay() + 7) % 7; // Usar getUTCDay para evitar problemas de zona horaria
+
+    // Retornar el nombre del día correspondiente
+    return daysOfWeek[dayIndex];
+}
 
 
 $(document).ready(function () {
-       let profitsChart = new Chart(document.getElementById('pluviometerChart'), {
+       let pluviometerChart = new Chart(document.getElementById('pluviometerChart'), {
         type: 'bar', // Tipo de gráfica (puede ser 'line', 'bar', etc.)
         data: {
             labels: [], // Etiquetas de los días
@@ -54,17 +72,17 @@ $(document).ready(function () {
 
            
             // Limpiar datos anteriores
-            profitsChart.data.labels = [];
-            profitsChart.data.datasets[0].data = [];
+            pluviometerChart.data.labels = [];
+            pluviometerChart.data.datasets[0].data = [];
 
             // Llenar datos de la gráfica
             pluviometer_info.forEach(day => {
-                 profitsChart.data.labels.push(getDayOfWeek(day.frequency)); // Asegúrate de que 'date' es la propiedad correcta
-                profitsChart.data.datasets[0].data.push(day.total); // Asegúrate de que 'total' es la propiedad correcta
+                pluviometerChart.data.labels.push(getDayOfWeek(day.frequency)); // Asegúrate de que 'date' es la propiedad correcta
+                pluviometerChart.data.datasets[0].data.push(day.total); // Asegúrate de que 'total' es la propiedad correcta
             });
 
             // Actualizar la gráfica
-            profitsChart.update();
+            pluviometerChart.update();
         })
         .catch(error => {
             console.error('Error fetching data:', error);
