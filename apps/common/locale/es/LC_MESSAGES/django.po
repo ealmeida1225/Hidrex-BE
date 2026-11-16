@@ -29,3 +29,27 @@ msgstr "marca de tiempo creada"
 #: apps/common/models.py:9
 msgid "Updated timestamp"
 msgstr "Marca de tiempo actualizada"
+
+#: templates/index.html
+msgid "Mapa Pluviómetro"
+msgstr "Mapa Pluviómetro"
+
+#: templates/index.html
+msgid "Mapa Área"
+msgstr "Mapa Área"
+
+#: templates/index.html
+msgid "Detalle índice precipitación pluviómetro"
+msgstr "Detalle índice precipitación pluviómetro"
+
+#: templates/index.html
+msgid "Gráfico Pluviómetro"
+msgstr "Gráfico Pluviómetro"
+
+#: templates/index.html
+msgid "Estadísticas anuales"
+msgstr "Estadísticas anuales"
+
+#: templates/index.html
+msgid "Estadísticas mensuales"
+msgstr "Estadísticas mensuales"

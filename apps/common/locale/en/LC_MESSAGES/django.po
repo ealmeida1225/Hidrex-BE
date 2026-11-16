@@ -28,3 +28,27 @@ msgstr ""
 #: apps/common/models.py:9
 msgid "Updated timestamp"
 msgstr ""
+
+#: templates/index.html
+msgid "Mapa Pluviómetro"
+msgstr ""
+
+#: templates/index.html
+msgid "Mapa Área"
+msgstr ""
+
+#: templates/index.html
+msgid "Detalle índice precipitación pluviómetro"
+msgstr ""
+
+#: templates/index.html
+msgid "Gráfico Pluviómetro"
+msgstr ""
+
+#: templates/index.html
+msgid "Estadísticas anuales"
+msgstr ""
+
+#: templates/index.html
+msgid "Estadísticas mensuales"
+msgstr ""
