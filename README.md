@@ -20,6 +20,12 @@ For deployment dependencies (Gunicorn, psycopg2-binary), run:
 uv sync --extra deploy
 ```
 
+For optional development tools (e.g., `runserver_plus` via Werkzeug), run:
+
+```bash
+uv sync --group dev
+```
+
 2. Make a copy of `REFERENCE.env` in the same directory and rename it to `.env`.
 
 3. Run migrations (creates/syncs the database as configured):
