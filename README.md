@@ -8,37 +8,51 @@ git push -uf origin main
 ```
 
 # STEPS FOR DEVELOPING
-1.  when the code is already cloned, create a python virtual enviroment (using currently python 3.11):
-python -m venv venv
+1.  when the code is already cloned, install dependencies with [uv](https://docs.astral.sh/uv/) (uses `pyproject.toml`; Python **3.11.x** is recommended/required as specified):
 
-2. Activate virtual enviroment:
-source /venv/bin/activate # for linux
-source /venv/Scripts/activate # for windows (there's other ways too)
+```bash
+uv sync
+```
 
-3. Install required packages running in the console:
-pip install -r requirements.txt
+For deployment dependencies (Gunicorn, psycopg2-binary), run:
 
-4. Make a copy of REFERENCE.env in the same directory and remove the filename. Finally the file should exists with the name: .env
+```bash
+uv sync --extra deploy
+```
 
-5. Run migrations (with this we have created a superuser):
-python manage.py migrate
+For optional development tools (e.g., `runserver_plus` via Werkzeug), run:
 
-<!-- 6. Create some dummy user objects (300):
-python manage.py create_test_users -->
+```bash
+uv sync --group dev
+```
 
-6. Load initial data (with this de admin default user is promoted to SUPER_ADMIN):
-python manage.py load_data
+2. Make a copy of `REFERENCE.env` in the same directory and rename it to `.env`.
 
-7. run server:
-python manage.py runserver
+3. Run migrations (creates/syncs the database as configured):
 
-8. interact with API, available on:
-http://127.0.0.1:8000/api/swagger/
+```bash
+uv run python manage.py migrate
+```
 
-9. If if needed to run locally over https:
-python manage.py runserver_plus --cert-file localhost.crt --key-file localhost.key
+<!-- 4. Create some dummy user objects (300):
+uv run python manage.py create_test_users -->
 
+4. Load initial data (promotes the default admin to SUPER_ADMIN, as applicable):
 
-!!!For BE Develop...
+```bash
+uv run python manage.py load_data
+```
 
-pip-chill >.\req.txt
+5. Run server:
+
+```bash
+uv run python manage.py runserver
+```
+
+6. API (Swagger): http://127.0.0.1:8000/api/swagger/
+
+7. Optional HTTPS locally:
+
+```bash
+uv run python manage.py runserver_plus --cert-file localhost.crt --key-file localhost.key
+```

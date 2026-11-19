@@ -11,5 +11,5 @@ class Area(models.Model):
     area_type = models.ForeignKey(AreaType, models.DO_NOTHING, null=True, blank=True)
     centroid_lon = models.FloatField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name

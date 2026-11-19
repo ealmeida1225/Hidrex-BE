@@ -39,7 +39,7 @@ class PluviometerSerializer(serializers.ModelSerializer):
             "__str__",
         ]
 
-    def get_locations(self, obj):
+    def get_locations(self, obj) -> list[dict]:
         try:
             areas = Area.objects.filter(
                 Exists(AreaNode.objects.filter(area=OuterRef("pk"))),

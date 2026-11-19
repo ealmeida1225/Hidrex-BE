@@ -35,5 +35,5 @@ class AreaSerializer(serializers.ModelSerializer):
             "__str__",
         ]
 
-    def get_area_type_name(self, object):
+    def get_area_type_name(self, object) -> str:
         return object.area_type.name if object.area_type else "No definido"

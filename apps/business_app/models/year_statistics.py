@@ -13,5 +13,5 @@ class YearStatistics(models.Model):
     pluviometer = models.ForeignKey(Pluviometer, models.CASCADE)
     year = models.SmallIntegerField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.pluviometer} ({self.year})"

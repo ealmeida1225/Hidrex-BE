@@ -1,0 +1,43 @@
+[project]
+name = "hidrex-be"
+version = "0.1.0"
+description = "Backend de Hidrex (Django)"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "celery[redis]",
+    "async-timeout",
+    "django",
+    "django-environ",
+    "django-filter",
+    "django-oauth-toolkit",
+    "django-session-timeout",
+    "djangorestframework",
+    "django-solo",
+    "django-safedelete",
+    "django-extensions",
+    "drf-spectacular",
+    "drf-spectacular-sidecar",
+    "drf-orjson-renderer",
+    "django-debug-toolbar",
+    "Faker",
+    "model-bakery",
+    "numpy",
+    "pillow",
+    "pandas",
+    "pytest-django",
+    "ruff",
+    "termcolor",
+    "wheel",
+]
+
+[project.optional-dependencies]
+deploy = [
+    "gunicorn",
+    "psycopg2-binary",
+]
+
+[dependency-groups]
+dev = ["werkzeug"]
+
+[tool.uv]
+package = false

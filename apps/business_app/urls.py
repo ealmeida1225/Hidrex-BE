@@ -1,6 +1,5 @@
-# from rest_framework import routers
 from django.urls import path
-from rest_framework_extensions.routers import ExtendedSimpleRouter
+from rest_framework.routers import DefaultRouter
 
 from apps.business_app.views import pages
 from apps.business_app.views.area import AreaViewSet
@@ -30,7 +29,7 @@ from apps.business_app.views.year_statistics import YearStatisticsViewSet
 
 # from django.urls import path
 
-router = ExtendedSimpleRouter()
+router = DefaultRouter()
 
 router.register(
     "area-node",
